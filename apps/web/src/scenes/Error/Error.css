@@ -1,0 +1,38 @@
+.error-element  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 90vh;
+    width: 100vw;
+}
+
+.error-element h1 {
+    font-size: 5rem;
+    color: var(--accent-color);
+    width: 95vw;
+}
+
+.error-element h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    width: 95vw;
+}
+
+.error-element img {
+    display: none;
+    flex-shrink: 1;
+    width: 30vw;
+    max-height: 90vh;
+    aspect-ratio: 1 / 1;
+}
+
+@media only screen and (min-width: 768px) {
+    .error-element img {
+        display: block;
+    }
+
+    .error-element h1, .error-element h2 {
+        width: auto;
+    }
+}

@@ -1,0 +1,57 @@
+.map-container {
+    position: absolute;
+    width: 98%;
+    height: 77vh;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+}
+
+#return-to-stores {
+    height: 4%;
+    width: 100%;
+    background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#return-to-stores p {
+    margin-left: 0.5rem;
+    color: var(--background-color);
+}
+
+#return-to-stores p:hover {
+    color: var(--primary-color);
+}
+
+.google-map {
+    border: none;
+    width: 98%;
+    height: 96%;
+}
+
+@media only screen and (min-width: 768px) {
+    .map-container {
+        width: 70%;
+        height: 82vh;
+        margin-left: 29%;
+    }
+
+    .google-map {
+        height: 100%;
+    }
+
+    #return-to-stores {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .map-container {
+        width: 72%;
+        height: 78vh;
+        margin-left: 26%;
+    }
+}

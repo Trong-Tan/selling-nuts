@@ -1,0 +1,47 @@
+:root {
+  /* color scheme */
+  --background-color: #ffffff;
+  --primary-color: #A46B35;
+  --secondary-color: #ECD2B8;
+  --accent-color: #3D2102;
+  --text-color: #000000;
+  --inverted-text-color: #ffffff;
+
+  font-family: 'Lato', sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+.inverted-text-color {
+  color: var(--background-color);
+}
+
+.normal-text-color {
+  color: var(--text-color);
+}
+
+body, html, #root {
+  background-color: var(--background-color);
+  margin: 0;
+  display: flex;
+  width: 100%;
+  min-width: 320px;
+  place-items: center;
+  min-height: 100vh;
+}
+
+p {
+  color: var(--text-color);
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+h2 {
+  color: var(--text-color);
+}

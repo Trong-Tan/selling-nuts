@@ -1,0 +1,160 @@
+.about {
+    min-height: 85vh;
+    margin-top: 10vh;
+    align-items: flex-start;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    align-items: center;
+}
+
+.about img {
+    display: none;
+    width: 30vw;
+    height: auto;
+    max-height: 80vh;
+    margin: 5vh 5vw;
+    flex-shrink: 1;
+}
+
+.about .story {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    width: 95vw;
+    margin-top: 8vh;
+}
+
+.about .story h1 {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.about .story p {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+}
+
+.about .story a {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+}
+
+.about .story .story-link {
+    color: var(--accent-color);
+}
+
+.about .story .emphasis {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.about dialog {
+    width: 95%;
+    border: var(--accent-color) 1px solid;
+    text-align: left;
+}
+
+.about dialog::backdrop {
+    backdrop-filter: blur(.2rem);
+} 
+
+.hidden {
+    visibility: hidden;
+}
+
+.message-sent {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--accent-color);
+    padding: .5rem .7rem .5rem 1rem;
+    border-radius: .3rem;;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.message-sent-text {
+    font-size: 1.1rem;
+    font-family: 'Lato', sans-serif;
+    color: var(--accent-color);
+    margin: 0 auto;
+}
+
+.close-message-sent {
+    font-size: .8rem;
+    margin: 0 auto;
+    cursor: pointer;
+    color: var(--primary-color)
+}
+
+.about dialog h1 {
+    color: var(--accent-color);
+}
+
+.about dialog input {
+    margin: 1rem auto 0 auto;
+    height: 2rem;
+    width: 100%;
+    font-size: 1.3rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.about dialog textarea {
+    margin: 1rem auto;
+    width: 100%;
+    font-size: 1.3rem;
+    font-family: 'Lato', sans-serif;
+}
+
+@media only screen and (min-width: 576px) {
+    .about .story {
+        width: 80vw;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .row {
+        flex-direction: row-reverse;
+    }
+
+    .about img {
+        display: block;
+    }
+
+    .about .story {
+        width: 60vw;
+        margin: 5vh 5vw;
+    }
+
+    .about dialog {
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .row {
+        flex-direction: row;
+    }
+
+    .about img {
+        width: 40vw;
+    }
+
+    .about .story {
+        width: 40vw;
+        margin: 5vh 5vw;
+    }
+
+    .about dialog {
+        width: 40%;
+    }
+}

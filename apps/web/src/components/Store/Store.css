@@ -1,0 +1,73 @@
+.store-preview {
+    width: 96%;
+    background-color: var(--background-color);
+    box-shadow: var(--secondary-color) 0px 2px 3px -1px;
+    padding: 2%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.store-preview button {
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    width: 80%;
+    padding: 0.4rem 0.4rem;
+    border-radius: 0.2rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 0.4rem 0;
+}
+
+.store-preview a {
+    align-self: center;
+}
+
+.open-tag {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+    background-color: var(--primary-color);
+    padding: 0.2rem 0.4rem;
+}
+
+.open-tag p {
+    margin: 0;
+    color: var(--background-color);
+}
+
+.store-preview h1 {
+    font-size: 1.6rem;
+    margin: 0.5rem 0 0 0;
+    width: 75%;
+}
+
+.store-preview p {
+    font-size: .8rem;
+}
+
+.store-preview:hover {
+    outline: solid 1px var(--accent-color);
+}
+
+@media only screen and (min-width: 450px) {
+    .store-preview button {
+        width: auto;
+        padding: 0.4rem 3rem;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .store-preview button {
+        padding: 0.4rem 0.4rem;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .store-preview button {
+        padding: 0.4rem 3rem;
+    }
+}

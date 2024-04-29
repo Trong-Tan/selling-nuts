@@ -1,0 +1,41 @@
+.map {
+    width: 100%;
+}
+
+#map-title {
+    margin: 10vh 0 3vh 1rem;
+    color: var(--text-color);
+}
+
+#map-area {
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    min-height: 77vh;
+    margin-left: 1vw;
+
+    .search-area {
+        z-index: 2;
+        background-color: #FAF9F6;
+        padding: 2%;
+        width: 100%;
+        min-height: 77vh;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1vh;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #map-area .search-area {
+        width: 25%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    #map-area .search-area {
+        padding: 0.5%;
+    }
+}

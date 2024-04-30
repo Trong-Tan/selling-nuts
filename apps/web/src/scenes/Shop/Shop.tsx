@@ -1,13 +1,88 @@
 import "./Shop.css"
-import Preview from "../../components/Preview/Preview";
-import { ProductContract } from "../../types";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Navbar from "../../components/Navbar/Navbar";
-import { useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Rating } from "react-simple-star-rating";
+import colorScheme from "@/colors";
+import cartIcon from "../../assets/add-to-cart-icon.png";
+
 
 function Shop() {
-  const [products, setProducts] = useState<ProductContract[]>(useLoaderData() as ProductContract[])
+  const products = [
+    {
+      "_id": "6498c18cef7076d898597a1b",
+      "name": "Planters' Mixed Nuts",
+      "price": 5.99,
+      "popularItem": true,
+      "__v": 0,
+      "discountPrice": null,
+      "numRatings": 146,
+      "rating": 4.5,
+      "imageUrl": "https://i.ibb.co/k6tJpGC/peanuts.png",
+      "nutType": "peanut"
+    },
+    {
+      "_id": "6498c19cef7076d898597a1d",
+      "name": "Lemoncello Chocolate Almonds",
+      "price": 8.99,
+      "popularItem": false,
+      "__v": 0,
+      "rating": 3,
+      "numRatings": 15,
+      "discountPrice": null,
+      "imageUrl": "https://i.ibb.co/z2qJ5sB/lemon-choc-almonds.webp",
+      "nutType": "almond"
+    },
+    {
+      "_id": "6498c1aaef7076d898597a1f",
+      "name": "Spicy Dill Cashews",
+      "price": 7.49,
+      "popularItem": false,
+      "__v": 0,
+      "rating": 3.5,
+      "numRatings": 19,
+      "discountPrice": null,
+      "imageUrl": "https://i.ibb.co/TcVPZZv/spicy-dill.webp",
+      "nutType": "cashew"
+    },
+    {
+      "_id": "6498c1d2ef7076d898597a21",
+      "name": "Gorbanzo Beans",
+      "price": 6.99,
+      "popularItem": false,
+      "__v": 0,
+      "rating": 4,
+      "numRatings": 33,
+      "discountPrice": 5.99,
+      "imageUrl": "https://i.ibb.co/rMXKgQW/beans.webp",
+      "nutType": "legume"
+    },
+    {
+      "_id": "649db5e9f48993899d054dd1",
+      "name": "Pistachios (No Shell)",
+      "price": 7.99,
+      "popularItem": true,
+      "__v": 0,
+      "rating": 4.5,
+      "numRatings": 88,
+      "discountPrice": null,
+      "imageUrl": "https://i.ibb.co/ncJkwmQ/pistachios.webp",
+      "nutType": "pistachio"
+    },
+    {
+      "_id": "652abd6bd2d0d1f970721677",
+      "name": "Honey Roasted Cashews",
+      "price": 3.99,
+      "discountPrice": null,
+      "popularItem": false,
+      "rating": 4,
+      "numRatings": 35,
+      "imageUrl": "https://i.ibb.co/Cnnjsh3/honeyroastedcashews.png",
+      "__v": 0,
+      "nutType": "cashew"
+    }
+  ]
   const [limit, setLimit] = useState(6);
   const [filter, setFilter] = useState<{[key: string]: object | string[]}>({"nutType": ["almond", "peanut", "pistachio", "cashew", "legume"]})
   const [sort, setSort] = useState<{[key: string]: number}>({})
@@ -15,7 +90,7 @@ function Shop() {
     setLimit(Number(e.currentTarget.value))
     const newProducts = await fetch(hydrateRequestUrl(Number(e.currentTarget.value), sort, filter))
       .then(res => res.json())
-    setProducts(newProducts)
+    newProducts(newProducts)
   }
   const handleFilter = async(field: string, checked: boolean) => {
     const newFilter = {...filter}
@@ -38,7 +113,7 @@ function Shop() {
     }
     const newProducts = await fetch(hydrateRequestUrl(limit, sort, newFilter))
       .then(res => res.json())
-    setProducts(newProducts)
+    newProducts(newProducts)
     setFilter(newFilter)
   }
 
@@ -52,7 +127,7 @@ function Shop() {
     }
     const newProducts = await fetch(hydrateRequestUrl(limit, newSort, filter))
       .then(res => res.json())
-    setProducts(newProducts)
+    newProducts(newProducts)
     setSort(newSort)
   }
 
@@ -93,9 +168,30 @@ function Shop() {
             </div>
           </div>
           <div className="product-container">
-            {products.map((product: ProductContract, i: number) => 
-              <Preview product={product} key={i}/>)}
+            {products.map(item => (
+              <div className="product-item" key={item._id}>
+                <Link to={item._id.toString()} className="preview">
+                  {/* absolutely positioned elements */}
+                  {item.popularItem ? <div className="best-seller-tag"><p>Best Seller</p></div> : <></>}
+                  <img src={cartIcon} alt="add to cart button" className="cart-icon" style={{ width: '70px', height: '70px' }} onClick={e => e.preventDefault()}/>
+                  {/* relative elements */}
+                  <img src={item.imageUrl} alt={item.name} style={{ width: '300px', height: '400px' }} className="preview-image" />
+                  <div>
+                    <h1>{item.name}</h1>
+                    {item.discountPrice == null ? 
+                      <p>${item.price.toFixed(2)}</p> :
+                      <p><s style={{color: "#8b0000"}}>${item.price.toFixed(2)}</s> ${item.discountPrice.toFixed(2)}</p>}
+                    <div className="star-rating">
+                      <Rating initialValue={item.rating} allowFraction={true} disableFillHover={true} allowHover={false} fillColor={colorScheme.primaryColor} 
+                        emptyColor={colorScheme.primaryColor} emptyStyle={{opacity: .4}} size={22} readonly={true}/>
+                      <p>({item.numRatings})</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
+
         </div>
       </div>
     </div>

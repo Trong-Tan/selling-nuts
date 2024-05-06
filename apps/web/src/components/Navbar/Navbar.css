@@ -22,8 +22,8 @@
     text-decoration: none;
 }
 
-#nav-icon {
-    height: 3vh;
+.nav-icon {
+    height: 8vh;
     aspect-ratio: 1/1;
 }
 

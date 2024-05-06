@@ -2,7 +2,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import cartIcon from "../../assets/empty-cart-icon.png";
 import accountIcon from "../../assets/account-icon.png";
-import navIcon from "../../assets/nav-icon.png";
+import navIcon from "../.././../public/logo.png";
 import { useState } from "react";
 import {useAuth0} from "@auth0/auth0-react";
 
@@ -34,7 +34,7 @@ function Navbar(props: { location: string }) {
       <h2>
         <Link to="..">ENUTS</Link>
       </h2>
-      <img src={navIcon} alt="navigation links" id="nav-icon" 
+      <img src={navIcon} alt="navigation links" className="nav-icon" 
         onClick={() => {navbar == "flex" ? showNav("") : showNav("flex")}}/>
       <nav className="navbar" style={{display: navbar}}>
         <Link to={paths.shopPath}>Shop</Link>

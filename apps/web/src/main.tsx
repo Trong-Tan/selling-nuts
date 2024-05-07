@@ -20,22 +20,16 @@ const router = createBrowserRouter([
   {
     path: "/shop",
     element: <Shop />,
-
-    // loader: async (): Promise<ProductContract[]> => {
-    //   return fetch("https://enuts.devinedwards.xyz/server/products?numItems=6&sort=nosort&filter=nofilter")
-    //     .then(res => res.json())
-    // },
-
     errorElement: <ErrorElement />
   },
   {
     path: "/shop/:productId",
     element: <Product />,
 
-    // loader: async ({params}): Promise<ProductContract> => {
-    //   return fetch(`https://enuts.devinedwards.xyz/server/product?productId=${params.productId}`)
-    //     .then(res => res.json())
-    // },
+    loader: async ({params}): Promise<ProductContract> => {
+      return fetch(`https://enuts.devinedwards.xyz/server/product?productId=${params.productId}`)
+        .then(res => res.json())
+    },
 
     errorElement: <ErrorElement />
   },

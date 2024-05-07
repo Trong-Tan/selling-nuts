@@ -107,8 +107,8 @@ function About() {
 export default About;
 
 const story =
-  <div>
-    <p>From a humble beginning, <span className="emphasis">ENUTS</span> has grown into a prospering business. Delivering nuts from our fields straight to your doorstep, our promise is to blah blah blah...</p>
-    <p>We are <span className="emphasis">not</span> a real business. However, the creator of this site is very real, and he wants to work with you! If you're interested, check out his <a className="story-link" href="https://devin-edwards.netlify.app/" target="_blank" rel="noreferrer">portfolio</a> and reach out!</p>
-    <p>If you're interested in buying nuts, kirkland peanuts are my favorite. You could also try <a className="story-link" href="https://www.nutstop.com/wholesale/bulk-nuts-seeds" target="_blank" rel="noreferrer">Nutstop</a> or <a className="story-link" href="https://www.americannutcompany.com/shop" target="_blank" rel="noreferrer">American Nut Company</a> if you looking for real online nut stores. I hope you find what you're looking for!</p>
-  </div>
+<div>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>

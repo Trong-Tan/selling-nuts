@@ -2,7 +2,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import cartIcon from "../../assets/empty-cart-icon.png";
 import accountIcon from "../../assets/account-icon.png";
-import navIcon from "../.././../public/logo.png";
+import navIcon from "/logo.png";
 import { useState } from "react";
 import {useAuth0} from "@auth0/auth0-react";
 

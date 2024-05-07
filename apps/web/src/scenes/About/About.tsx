@@ -21,7 +21,7 @@ function About() {
   const messageBox = useRef<HTMLDialogElement>(null);
   const form = useRef<HTMLFormElement>(null);
   const [messageSent, showMessageSent] = useState(false);
-  const [timeoutPromise, setTimeoutPromise] = useState<TimeoutPromise>();
+  const [timeoutPromise] = useState<TimeoutPromise>();
   const openMessage = () => {
     messageBox.current !== null ? messageBox.current.showModal() : window.alert("An unexpected error has occurred.\nTry contacting us at our email: wehavenoemail@fakeemail.com");
   }
@@ -31,42 +31,6 @@ function About() {
   const closeMessageSent = () => {
     showMessageSent(false);
     timeoutPromise?.clear();
-  }
-  const sleep = (ms: number): TimeoutPromise => {
-    let timeoutId: NodeJS.Timeout | null = null;
-
-    const promise = new TimeoutPromise((resolve) => {
-      timeoutId = setTimeout(() => resolve(), ms);
-    });
-
-    if(timeoutId !== null ) promise.setTimeoutId(timeoutId);
-    setTimeoutPromise(promise);
-  
-    return promise;
-  }
-
-  const submitMessage = async() => {
-    
-    messageBox.current?.close();
-
-    fetch("https://enuts.devinedwards.xyz/mail/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "name": form.current?.elements[0],
-        "email": form.current?.email.valueOf(),
-        "message": form.current?.message.valueOf() 
-      })
-    })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    
-    showMessageSent(true);
-    await sleep(3000)
-      .then(() => showMessageSent(false))
-      .catch(e => window.alert(e))
   }
 
 
@@ -91,7 +55,7 @@ function About() {
             </form>
             <div className="button-container">
               <Button buttonType="secondary" textType="normal-text-color" listener={closeMessage}>Cancel</Button>
-              <Button buttonType="primary" textType="inverted-text-color" asyncListener={submitMessage}>Send</Button>
+              <Button buttonType="primary" textType="inverted-text-color" >Send</Button>
             </div>
           </dialog>
         </div>

@@ -33,7 +33,7 @@ function Home() {
           </p>
           <div className="button-container">
             <Button className="text-white bg-[#A46B35]">Shop</Button>
-            <Button className="text-black bg-[#ECD2B8s]">About Us</Button>
+            <Button className="text-black bg-[#ECD2B8]">About Us</Button>
           </div>
         </div>
         <img src={walnuts} alt="walnuts" />

@@ -30,7 +30,7 @@ function Navbar(props: { location: string }) {
   }
 
   return (
-    <div className="header">
+    <div className="header border-b-2 bg-[#f7eade] border-[#F5EFE9] w-full">
       <h2>
         <Link to="..">ENUTS</Link>
       </h2>

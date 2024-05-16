@@ -3,9 +3,8 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import Navbar from "../../components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Rating } from "react-simple-star-rating";
-import colorScheme from "@/colors";
 import cartIcon from "../../assets/add-to-cart-icon.png";
+import { Star } from "lucide-react";
 
 
 function Shop() {
@@ -150,10 +149,10 @@ function Shop() {
     <div style={{width: "100%"}}>
       <Navbar location="shop"/>
       <div className="shop">
-        <div className="product-filter">
-          <h1 className="filter-title">Filters</h1>
+        <div className="product-filter ">
+          <h1 className="filter-title ">Filters</h1>
           <div className="rule" />
-          {filters.map((e, i) => <Dropdown title={e.title} options={e.options} key={i} filter={handleFilter} sort={handleSort}/>)}
+          {filters.map((e, i) => <Dropdown title={e.title}  options={e.options} key={i} filter={handleFilter} sort={handleSort}/>)}
         </div>
         <div style={{width: "100%"}}>
           <div className="product-header">
@@ -169,21 +168,20 @@ function Shop() {
           </div>
           <div className="product-container">
             {products.map(item => (
-              <div className="product-item" key={item._id}>
-                <Link to={item._id.toString()} className="preview">
+              <div className="product-item border-2 border-[#ECD2B8] justify-center items-center cursor-pointer hover:border-[#97836f] hover:bg-[#fffaf5be]" key={item._id}>
+                <Link to={item._id.toString()} className="preview ">
                   {/* absolutely positioned elements */}
-                  {item.popularItem ? <div className="best-seller-tag"><p>Best Seller</p></div> : <></>}
-                  <img src={cartIcon} alt="add to cart button" className="cart-icon" style={{ width: '70px', height: '70px' }} onClick={e => e.preventDefault()}/>
+                  {/* {item.popularItem ? <div className="best-seller-tag"><p>Best Seller</p></div> : <></>} */}
+                  <img src={cartIcon} alt="add to cart button" className="cart-icon ml-40" width="50" height="50" onClick={e => e.preventDefault()}/>
                   {/* relative elements */}
-                  <img src={item.imageUrl} alt={item.name} style={{ width: '300px', height: '400px' }} className="preview-image" />
+                  <img src={item.imageUrl} alt={item.name} className="preview-image w-52 h-52" />
                   <div>
                     <h1>{item.name}</h1>
                     {item.discountPrice == null ? 
                       <p>${item.price.toFixed(2)}</p> :
                       <p><s style={{color: "#8b0000"}}>${item.price.toFixed(2)}</s> ${item.discountPrice.toFixed(2)}</p>}
                     <div className="star-rating">
-                      <Rating initialValue={item.rating} allowFraction={true} disableFillHover={true} allowHover={false} fillColor={colorScheme.primaryColor} 
-                        emptyColor={colorScheme.primaryColor} emptyStyle={{opacity: .4}} size={22} readonly={true}/>
+                      <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" />
                       <p>({item.numRatings})</p>
                     </div>
                   </div>

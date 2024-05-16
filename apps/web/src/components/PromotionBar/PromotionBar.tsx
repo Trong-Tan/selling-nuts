@@ -25,7 +25,7 @@ function PromotionBar() {
   }, [runEffect, currentPromo, promotions])
 
   return (
-    <div className="promotion-bar bg-yellow-500">
+    <div className="promotion-bar bg-[#A46B35] text-white">
       <p className="inverted-text-color" id="left-promotion-arrow"
         onClick={() => handleArrowClick(-1)}>{"<"}</p>
       <div id="promotion-container">

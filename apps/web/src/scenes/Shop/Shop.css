@@ -90,7 +90,6 @@
 .product-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
   }
   
   .product-item {
@@ -101,11 +100,6 @@
     padding: 20px;
     border: 1px solid #e0e0e0;
   }
-  
-  .product-item img {
-    max-width: 100%;
-  }
-  
   .product-item h1 {
     margin-top: 10px;
     font-size: 1.2rem;

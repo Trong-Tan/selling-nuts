@@ -50,7 +50,7 @@
 }
 
 .product-text button {
-    background-color: var(--accent-color);
+    background-color: #3D2102;
     border: none;
     color: var(--background-color);
     padding: 0.8rem 0;
@@ -60,6 +60,7 @@
     align-self: center;
     margin-top: 1rem;
     cursor: pointer;
+    color: white    ;
 }
 
 .rule {
@@ -69,11 +70,12 @@
 }
 
 #hot-product {
-    background-color: var(--secondary-color);
+    background-color: #ECD2B8;
     width: fit-content;
     padding: 0.3rem 0.5rem;
     margin: 1rem 0 0 0;
     font-size: 0.8rem;
+    border-radius: 30px;
 }
 
 .quantity-counter {
@@ -81,6 +83,8 @@
     flex-direction: row;
     align-items: center;
     margin: 0;
+    height: auto;
+    width: 60px;
 }
 
 .product-content .quantity-counter button {

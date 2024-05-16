@@ -2,10 +2,10 @@ import "./Product.css";
 import Navbar from "../../components/Navbar/Navbar";
 import { useLoaderData } from "react-router-dom";
 import { ProductContract } from "../../types";
-import colorScheme from "../../colors";
-import { Rating } from "react-simple-star-rating";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 function Product() {
   const product = useLoaderData() as ProductContract;
@@ -22,29 +22,28 @@ function Product() {
       <div className="product-content">
         <Link id="product-path" to="../shop">← <span>Back to Shop</span></Link>
         <Link id="product-path-mobile" to="../shop">← <span>Shop</span></Link>
-        <img src={product.imageUrl} alt={product.name} id="product-image"></img>
+        <img className="border-4 border-[#3D2102] rounded-3xl p-5" src={product.imageUrl} alt={product.name} id="product-image"></img>
         <div className="product-text">
           <div id="name-and-tag">
             <p id="hot-product" style={{display: product.popularItem ? "block" : "none"}}>HOT</p>
-            <h1 id="product-name">{product.name}</h1>
+            <h1 id="product-name" className="font-medium text-4xl">{product.name}</h1>
           </div>
-          <div className="star-rating">
+          <div className="star-rating flex text-[#A7703F]">
             <p>{product.rating}</p>
-            <Rating initialValue={product.rating} allowFraction={true} disableFillHover={true} allowHover={false} fillColor={colorScheme.primaryColor} 
-              emptyColor={colorScheme.primaryColor} emptyStyle={{opacity: .4}} size={20} readonly={true}/>
+            <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" />
             <p>({product.numRatings})</p>
           </div>
           <p id="product-price">${product.price.toFixed(2)}</p>
-          <div className="rule"/>
+          <div className="rule border-b-2 border-[#ab977f]"/>
           <p>description</p>
           <div style={{margin: "1rem 0", display: "flex", flexDirection: "column"}}>
             <p style={{fontWeight: "bold", fontSize: "0.95rem", margin: "0 0 0.4rem 0"}}>Quantity</p>
-            <div className="quantity-counter">
-              <button onClick={() => handleChange(String(quantity - 1))} onDoubleClick={e => e.preventDefault()}>-</button>
+            <div className="quantity-counter border-2 border-[#3D2102] rounded-md p-1">
+              <Button onClick={() => handleChange(String(quantity - 1))} onDoubleClick={e => e.preventDefault()}>-</Button>
               <input value={String(quantity)} onChange={(e) => handleChange(e.currentTarget.value)}/>
-              <button onClick={() => handleChange(String(quantity + 1))} onDoubleClick={e => e.preventDefault()}>+</button>
+              <Button onClick={() => handleChange(String(quantity + 1))} onDoubleClick={e => e.preventDefault()}>+</Button>
             </div>
-            <button>Add to cart</button>
+            <Button className="bg-[#3D2102]">Add to cart</Button>
           </div>
         </div>
       </div>

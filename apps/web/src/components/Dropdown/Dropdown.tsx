@@ -3,7 +3,7 @@ import { useState } from "react";
 
 type HandleOption = (field: string, checked: boolean) => void
 
-function Dropdown(props: {title: string, options: string[], filter: HandleOption, sort: HandleOption}) {
+function Dropdown(props: {title: string, options: string[], filter: HandleOption, sort: HandleOption, className?: string}) {
   const [revealed, reveal] = useState(true)
   const initChecked: { [key: string]: boolean } = {}
   const startChecked = props.title === "Nut"
@@ -32,7 +32,7 @@ function Dropdown(props: {title: string, options: string[], filter: HandleOption
 
   return (
     <div>
-      <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", cursor: "pointer"}} 
+      <div className="border-t-2 border-[#ECD2B8]" style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", cursor: "pointer"}} 
         onClick={() => handleReveal()}>
         <h1 style={{margin: ".5rem 0 .5rem 0", fontSize: "1.1rem"}}>{props.title}</h1>
         {revealed ? <p style={arrowStyle}>▼</p> : <p style={arrowStyle}>▲</p>}

@@ -32,7 +32,7 @@ function Map() {
   return (
     <div className="map">
       <Navbar location="map" />
-      <h1 id="map-title">Find A Store</h1>
+      <h1 id="map-title" className="font-medium text-4xl">Find A Store</h1>
       <div id="map-area">
         <div className="search-area">
           {locations.map((e, i) => <Store key={i} locationInfo={e} setMap={setActiveMap} setMapVisibility={setMapVisibility}/>)}

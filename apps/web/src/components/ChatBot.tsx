@@ -65,7 +65,7 @@ function ChatBot() {
             ))}
             <br /><br />
           </div>
-          <div className="flex justify-between gap-3 px-2 pt-2 absolute bg-[#D2C1B7] w-full border-b-8 border-x-8 border-[#C3C6C5]">
+          <div className="flex justify-between gap-3 px-2 pt-2 absolute bg-[#DDDFDD] w-full border-b-8 border-x-8 border-[#BB9068]">
             <textarea
               className="resize rounded-md p-1 w-full"
               placeholder="Ask anything!"

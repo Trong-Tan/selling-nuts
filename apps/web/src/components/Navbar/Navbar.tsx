@@ -1,19 +1,22 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import cartIcon from "../../assets/empty-cart-icon.png";
-import accountIcon from "../../assets/account-icon.png";
 import navIcon from "/logo.png";
 import { useState } from "react";
-import {useAuth0} from "@auth0/auth0-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Cog } from "lucide-react";
 
 function Navbar(props: { location: string }) {
   const paths = getPaths(props.location);
-  const [loginPopup, setLoginPopup] = useState<"none" | "block">("none");
   const [logoutPopup, setLogoutPopup] = useState<"none" | "block">("none");
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
-  // const [accountPopup, setAccountPopup] = useState<"hidden" | "visible">(
-  //   "hidden"
-  // );
   const [cartPopup, setCartPopup] = useState<"none" | "block">("none");
   const [navbar, showNav] = useState<"flex" | "">("");
   const cartNum = 0;
@@ -41,46 +44,31 @@ function Navbar(props: { location: string }) {
         <Link to={paths.mapPath}>Locations</Link>
         <Link to={paths.aboutPath}>About Us</Link>
         <Link to="" id="cart-nav">Cart</Link>
-        <Link to="" id="account-nav">Account</Link>
         <div className="icons">
           <img
             src={cartIcon}
             alt="view cart button"
             onClick={() => setCartPopup("block")}
           />
-          <span
-            className="cart-number"
-            style={{ visibility: cartNumVisibility }}
-          >
-            {cartNumDisplayed}
-          </span>
-          <img
-            src={accountIcon}
-            alt="view account information button"
-            onClick={() => {isAuthenticated ? setLogoutPopup("block") : setLoginPopup("block"); console.log(isAuthenticated)}}
-          />
         </div>
+        <div style={{ display: cartPopup }} className="screen-fill"
+          onClick={() => setCartPopup("none")}>
+          <div className="cart-popup login-popup">
+            <span className="login-text">Your cart is empty.</span>
+          </div>
+        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Cog className="h-10 w-10"/>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem><Link to={paths.loginPath} >Login</Link></DropdownMenuItem>
+            <DropdownMenuItem><Link to={paths.loginPath} >Sign-up</Link></DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </nav>
-      <div style={{ display: loginPopup }} className="screen-fill"
-        onClick={() => {setLoginPopup("none"); console.log(isAuthenticated)}}>
-        <div className="login-popup" onClick={() => loginWithRedirect()}>
-          <span className="login-text">log in / sign up</span>
-          <span>→</span>
-        </div>
-      </div>
-      <div style={{ display: logoutPopup }} className="screen-fill"
-        onClick={() => setLogoutPopup("none")}>
-        <div className="login-popup" onClick={() => logout({logoutParams: {returnTo: "https://enuts.devinedwards.xyz/"}})}>
-          <span className="login-text">log out</span>
-          <span>→</span>
-        </div>
-      </div>
-      <div style={{ display: cartPopup }} className="screen-fill"
-        onClick={() => setCartPopup("none")}>
-        <div className="cart-popup login-popup">
-          <span className="login-text">Your cart is empty.</span>
-        </div>
-      </div>
     </div>
   );
 }
@@ -89,30 +77,35 @@ interface Paths {
   shopPath: string;
   mapPath: string;
   aboutPath: string;
+  loginPath: string
 }
 
 const getPaths = (location: string): Paths => {
-  let shopPath, mapPath, aboutPath;
+  let shopPath, mapPath, aboutPath, loginPath;
   switch (location) {
   case "home":
-    (shopPath = "/shop"), (mapPath = "/locations"), (aboutPath = "/about");
+    (shopPath = "/shop"), (mapPath = "/locations"), (aboutPath = "/about"), (loginPath = "../login");
     break;
   case "shop":
-    (shopPath = ""), (mapPath = "../locations"), (aboutPath = "../about");
+    (shopPath = ""), (mapPath = "../locations"), (aboutPath = "../about"), (loginPath = "../login");
     break;
   case "map":
-    (shopPath = "../shop"), (mapPath = ""), (aboutPath = "../about");
+    (shopPath = "../shop"), (mapPath = ""), (aboutPath = "../about"), (loginPath = "../login");
     break;
   case "about":
-    (shopPath = "../shop"), (mapPath = "../locations"), (aboutPath = "");
+    (shopPath = "../shop"), (mapPath = "../locations"), (aboutPath = ""), (loginPath = "../login");
     break;
+  case "login":
+    (shopPath = "../shop"), (mapPath = "../locations"), (aboutPath = ""), (loginPath = "");
+    break;  
   case "error":
     (shopPath = "../shop"),
     (mapPath = "../locations"),
     (aboutPath = "../about");
+    (loginPath = "../login");
     break;
   default:
-    (shopPath = "../shop"), (mapPath = "../locations"), (aboutPath = "../about");
+    (shopPath = "../shop"), (mapPath = "../locations"), (aboutPath = "../about"), (loginPath = "../login");
     break;
   }
 
@@ -120,6 +113,7 @@ const getPaths = (location: string): Paths => {
     shopPath,
     mapPath,
     aboutPath,
+    loginPath,
   };
 };
 

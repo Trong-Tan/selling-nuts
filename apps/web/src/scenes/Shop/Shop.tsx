@@ -1,5 +1,4 @@
 import "./Shop.css"
-import Dropdown from "../../components/Dropdown/Dropdown";
 import Navbar from "../../components/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -152,7 +151,6 @@ function Shop() {
         <div className="product-filter ">
           <h1 className="filter-title ">Filters</h1>
           <div className="rule" />
-          {filters.map((e, i) => <Dropdown title={e.title}  options={e.options} key={i} filter={handleFilter} sort={handleSort}/>)}
         </div>
         <div style={{width: "100%"}}>
           <div className="product-header">

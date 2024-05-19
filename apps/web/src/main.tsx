@@ -10,7 +10,6 @@ import { ProductContract } from "./types";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { LogIn } from "lucide-react";
 import Login from "./scenes/login";
 
 const router = createBrowserRouter([

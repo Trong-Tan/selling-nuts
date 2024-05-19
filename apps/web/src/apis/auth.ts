@@ -5,8 +5,6 @@ interface SignUp {
   lastName: string
   email: string
   password: string
-  dob: string
-  gender: string
 }
 export interface User {
   lastName: string
@@ -35,14 +33,12 @@ export const signIn = async (data: SignInData) => {
   return res.data
 }
 
-export const signUp = async ({ lastName, firstName, email, password, dob ,gender }: SignUp) => {
+export const signUp = async ({ lastName, firstName, email, password}: SignUp) => {
   const res = await request.post('/sign-up', {
     lastName,
     firstName,
     email,
     password,
-    dob,
-    gender
   })
   return res.data
 }
@@ -59,9 +55,6 @@ export const getMe = async () => {
   return res.data
 }
 
-export const getAll = async () => {
-  const res = await request.get('')
-}
 
 export const resetPassword = async (token: string, password: string) => {
   const res = await request.post(

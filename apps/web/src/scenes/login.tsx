@@ -6,15 +6,17 @@ import { setToken } from '@/utils/token'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import * as z from 'zod'
 import Signup from '../components/Signup'
 import Navbar from '@/components/Navbar/Navbar'
+import { useState } from 'react'
 
 export type LoginInputs = z.infer<typeof loginSchema>
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   const {
@@ -28,6 +30,7 @@ export default function Login() {
 
   const onSubmit = async (data: LoginInputs) => {
     try {
+      setIsLoading(true)
       const res = await signIn(data)
       setToken(res.accessToken)
       navigate('/')
@@ -36,15 +39,16 @@ export default function Login() {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message)
       }
-    } 
+    } finally {
+      setIsLoading(false)
+    }
   }
-
   return (
     <div className="m-auto flex items-center justify-center space-y-3 lg:p-32">
       <Navbar location="login" />
       <div className="container flex flex-col items-center space-y-10 md:flex-row md:justify-between">
         <div className=" flex w-1/2 flex-col space-y-3">
-          <h1 className="text-4xl text-6xl font-bold text-primary">facebook</h1>
+          <h1 className="text-6xl font-bold text-primary">facebook</h1>
           <p className=" text-2xl font-medium">
             Facebook giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống của bạn.
           </p>

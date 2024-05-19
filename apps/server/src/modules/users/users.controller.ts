@@ -3,7 +3,6 @@ import { auth } from "@/middlewares/auth";
 import { zValidator } from "@hono/zod-validator";
 import { updateMeDto } from "./dtos/update-me.dto";
 import { UsersService } from "./users.services";
-import { PostsService } from "../posts/posts.service";
 
 export const router = new Hono();
 
@@ -42,12 +41,4 @@ router
       status: 200,
     });
   })
-  .get("/:userId/posts", auth, async (c) => {
-    const userId = c.req.param("userId");
-    const posts = await PostsService.getByUserId(userId);
 
-    return c.json({
-      data: posts,
-      status: 200,
-    });
-  });

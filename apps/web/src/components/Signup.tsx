@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
@@ -15,24 +14,13 @@ import {
   DialogTrigger,
   DialogHeader
 } from '@/components/ui/dialog'
-import { ShieldQuestion } from 'lucide-react'
-import dayjs from 'dayjs'
+import { useState } from 'react'
+import { z } from 'zod'
 
-interface SignUpInputs {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  // dob: Date
-  gender: string
-}
+
+export type SignUpInputs = z.infer<typeof signUpSchema>
 
 export default function Signup() {
-  const dateObj = new Date()
-  const [day, setDay] = useState(`${dateObj.getDate()}`)
-  const [month, setMonth] = useState(`${dateObj.getMonth() + 1}`)
-  const [year, setYear] = useState(`${dateObj.getFullYear()}`)
-
   const {
     register,
     handleSubmit,
@@ -41,30 +29,23 @@ export default function Signup() {
     resolver: zodResolver(signUpSchema)
   })
 
-  const onSubmit = async (data: any) => {
+  const [isLoading, setIsLoading] = useState(false)
+
+
+  const onSubmit = async (data: SignUpInputs) => {
     try {
-      data.dob = dayjs(`${year}-${month}-${day}`).toISOString()
+      setIsLoading(true)
       await signUp(data)
       toast.success('Sign-up successfully!')
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message)
-      }
+      } 
+    }finally {
+      setIsLoading(false)
     }
   }
-
-  const handleDayChange = (value: string) => {
-    setDay(value)
-  }
-
-  const handleMonthChange = (value: string) => {
-    setMonth(value)
-  }
-
-  const handleYearChange = (value: string) => {
-    setYear(value)
-  }
-  console.log(dateObj.getMonth(), 'sss')
+ 
 
   return (
     <Dialog>
@@ -112,10 +93,6 @@ export default function Signup() {
               type="password"
             />
             {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
-            <div className="flex items-center">
-              <p className="text-sm text-[#828697]">Ngày sinh</p>
-              <ShieldQuestion className="h-3 w-3 " />
-            </div>
             <p className="text-sm text-[#828697]">
               Những người dùng dịch vụ của chúng tôi có thể đã tải thông tin liên hệ của bạn lên Facebook.{' '}
               <span className="text-primary">Tìm hiểu thêm.</span>

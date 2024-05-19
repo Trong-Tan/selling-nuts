@@ -7,18 +7,6 @@ datasource db {
   url  	    = env("DATABASE_URL")
 }
 
-model Category {
-  id               String     @id @default(cuid())
-  name             String     @unique
-  icon             String?
-  products         Product[]
-  subCategories    Category[] @relation("SubCategories")
-  parentCategory   Category?  @relation("SubCategories", fields: [parentCategoryId], references: [id])
-  parentCategoryId String?
-
-  @@map("categories")
-}
-
 model User {
   id          String         @id @default(cuid())
   firstName   String?
@@ -28,99 +16,6 @@ model User {
   avatar      String?
   phone       String?
   password    String
-  dob         DateTime?
-  gender      String?
-  school      String?
-  background  String?
-  workAt      String?
-  address     String?
-  posts       Post[]
-  groups      GroupsOnUser[]
-  groupsRoles RolesOnGroup[]
-  Group       Group[]
-
+  
   @@map("users")
-}
-
-enum PublishType {
-  PUBLIC
-  FRIENDS
-  FRIENDS_EXCEPT
-  ONLY_ME
-  SPECIFIC_FRIENDS
-  CUSTOM
-}
-
-enum RoleOnGroup {
-  ADMIN
-  MOD
-  MEMBER
-}
-
-enum TypeOfGroup {
-  PUBLIC
-  PRIVATE
-}
-
-model Post {
-  id          String      @id @default(cuid())
-  user        User?       @relation(fields: [userId], references: [id])
-  userId      String?
-  content     String?
-  location    String?
-  media       String[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  publishType PublishType @default(PUBLIC)
-
-  @@index([userId])
-  @@map("posts")
-}
-
-model Product {
-  id          String   @id @default(cuid())
-  categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  name        String?
-  price       Int?
-  description String?
-  location    String?
-  images      Json?
-
-  @@index([categoryId])
-}
-
-model Group {
-  id           String         @id @default(cuid())
-  name         String
-  userId       String
-  type         TypeOfGroup
-  users        GroupsOnUser[]
-  User         User           @relation(fields: [userId], references: [id])
-  RolesOnGroup RolesOnGroup[]
-
-  @@index([userId])
-  @@map("groups")
-}
-
-model RolesOnGroup {
-  user    User        @relation(fields: [userId], references: [id])
-  userId  String
-  group   Group       @relation(fields: [groupId], references: [id])
-  groupId String
-  role    RoleOnGroup
-
-  @@id([userId, groupId])
-  @@map("group_roles")
-}
-
-model GroupsOnUser {
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String
-  group   Group  @relation(fields: [groupId], references: [id])
-  groupId String
-
-  @@id([userId, groupId])
-  @@index([groupId, userId])
-  @@map("group_members")
 }

@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { auth } from "@/middlewares/auth";
 import { zValidator } from "@hono/zod-validator";
 import { updateMeDto } from "./dtos/update-me.dto";
-import { UsersService } from "./users.services";
+import { UsersService } from "./users.service";
 
 export const router = new Hono();
 

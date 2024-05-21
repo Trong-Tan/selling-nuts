@@ -4,6 +4,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { router as authRouter } from "./modules/auth/auth.controller";
 import { router as usersRouter } from "./modules/users/users.controller";
+import { router as productsRouter } from "./modules/products/products.controller";
 import { auth } from "./middlewares/auth";
 import { errorFilter } from "./lib/error-filter";
 
@@ -21,6 +22,7 @@ app.use(
 );
 
 app.route("/", authRouter);
+app.route("/products", productsRouter);
 app.route("/users", usersRouter);
 app.notFound((c) => {
   return c.json(

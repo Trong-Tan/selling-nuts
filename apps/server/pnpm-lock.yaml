@@ -41,6 +41,9 @@ importers:
       express:
         specifier: ^4.19.2
         version: 4.19.2
+      hone:
+        specifier: ^1.1.0
+        version: 1.1.0
       hono:
         specifier: ^3.12.8
         version: 3.12.8
@@ -50,6 +53,9 @@ importers:
       nodemailer:
         specifier: ^6.9.8
         version: 6.9.8
+      types:
+        specifier: ^0.1.1
+        version: 0.1.1
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -1598,6 +1604,9 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
+  hone@1.1.0:
+    resolution: {integrity: sha512-OT6AXfa+pMwM0jJbpyZk6/pgQ4m9vMkiUSKMfRbYv+Tnca/IRLsfBbmJy/FcsrqujW54Yvn6g+ApBwUnD8MQZg==}
+
   hono@3.12.8:
     resolution: {integrity: sha512-vnOEIRdqsp4uHE/dkOBr9EYmTsR86sD/FyG2xhfAQzR9udDRglN1nuO7SGc/7U3HfSorc6PSCNGN6upnVtCmfg==}
     engines: {node: '>=16.0.0'}
@@ -2264,6 +2273,10 @@ packages:
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
+
+  types@0.1.1:
+    resolution: {integrity: sha512-JuntZtJj4MKLE9x/XBs7IjsznYhzETwr34pw3XJTKvgYtAMdeMG+o8x8U85E5Lm6eCPa1DdOdGVsHMwq4ZnZAg==}
+    engines: {node: '>= 0.6.0'}
 
   typescript@4.9.5:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
@@ -4366,6 +4379,8 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  hone@1.1.0: {}
+
   hono@3.12.8: {}
 
   http-errors@1.4.0:
@@ -5009,6 +5024,8 @@ snapshots:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.35
+
+  types@0.1.1: {}
 
   typescript@4.9.5: {}
 

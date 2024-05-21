@@ -4,7 +4,7 @@ import { BadRequestException, UnauthorizedException } from "@/lib/exceptions";
 import { User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { UsersService } from "../users/users.services";
+import { UsersService } from "../users/users.service";
 import { mailService } from "@/lib/mail.service";
 
 const ACCESS_TOKEN_EXPIRE_IN = 60 * 60;

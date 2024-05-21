@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Home from "./scenes/Home/Home";
-import Shop from "./scenes/Shop/Shop";
-import Map from "./scenes/Map/Map";
-import About from "./scenes/About/About";
-import ErrorElement from "./scenes/Error/Error";
-import Product from "./scenes/Product/Product";
+import Home from "./pages/Home/Home";
+import Shop from "./pages/Shop/Shop";
+import Map from "./pages/Map/Map";
+import About from "./pages/About/About";
+import ErrorElement from "./pages/Error/Error";
+import Product from "./pages/Product/Product";
 import { ProductContract } from "./types";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
-import Login from "./scenes/login";
+import Login from "./pages/login";
 
 const router = createBrowserRouter([
   { 
@@ -26,12 +26,6 @@ const router = createBrowserRouter([
   {
     path: "/shop/:productId",
     element: <Product />,
-
-    loader: async ({params}): Promise<ProductContract> => {
-      return fetch(`https://enuts.devinedwards.xyz/server/product?productId=${params.productId}`)
-        .then(res => res.json())
-    },
-
     errorElement: <ErrorElement />
   },
   {
@@ -61,6 +55,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       }}>
       <RouterProvider router={router} />
     </Auth0Provider>
-    
   </React.StrictMode>
 );

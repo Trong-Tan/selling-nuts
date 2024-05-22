@@ -48,9 +48,9 @@ export default function Login() {
       <Navbar location="login" />
       <div className="container flex flex-col items-center space-y-10 md:flex-row md:justify-between">
         <div className=" flex w-1/2 flex-col space-y-3">
-          <h1 className="text-6xl font-bold text-primary">facebook</h1>
+          <h1 className="text-6xl font-bold text-primary">ENUTS</h1>
           <p className=" text-2xl font-medium">
-            Facebook giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống của bạn.
+            Enuts giúp bạn tìm kiếm nhanh chóng các hạt giống từ mọi nơi trên trái đất.
           </p>
         </div>
         <div className="w-2/5">

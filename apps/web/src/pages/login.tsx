@@ -45,7 +45,6 @@ export default function Login() {
   }
   return (
     <div className="m-auto flex items-center justify-center space-y-3 lg:p-32">
-      <Navbar location="login" />
       <div className="container flex flex-col items-center space-y-10 md:flex-row md:justify-between">
         <div className=" flex w-1/2 flex-col space-y-3">
           <h1 className="text-6xl font-bold text-primary">ENUTS</h1>

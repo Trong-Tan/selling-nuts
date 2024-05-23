@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cartIcon from "../../assets/empty-cart-icon.png";
 import navIcon from "/logo.png";
 import { useState } from "react";
@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Cog } from "lucide-react";
+import { getToken, removeToken } from "@/utils/token";
 
 function Navbar(props: { location: string }) {
   const paths = getPaths(props.location);
@@ -20,6 +21,8 @@ function Navbar(props: { location: string }) {
   const [cartPopup, setCartPopup] = useState<"none" | "block">("none");
   const [navbar, showNav] = useState<"flex" | "">("");
   const cartNum = 0;
+  const accessToken = getToken()
+  const navigate = useNavigate()
   let cartNumDisplayed = "";
   let cartNumVisibility: "visible" | "hidden" = "hidden";
   if (cartNum == 0) {
@@ -31,6 +34,11 @@ function Navbar(props: { location: string }) {
     cartNumVisibility = "visible";
     cartNumDisplayed = "+";
   }
+
+  const handleLogout = () => {
+    removeToken();
+    navigate("/login"); 
+  };
 
   return (
     <div className="header border-b-2 bg-[#f7eade] border-[#F5EFE9] w-full">
@@ -64,8 +72,20 @@ function Navbar(props: { location: string }) {
           <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem><Link to={paths.loginPath} >Login</Link></DropdownMenuItem>
-            <DropdownMenuItem><Link to={paths.loginPath} >Sign-up</Link></DropdownMenuItem>
+            {accessToken ? (
+              <DropdownMenuItem className="cursor-pointer" >
+                <div className="log-out" onClick={handleLogout}>Log out</div>
+              </DropdownMenuItem>
+            ) : (
+              <>
+                <DropdownMenuItem>
+                  <Link to={paths.loginPath}>Login</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link to={paths.loginPath}>Sign-up</Link>
+                </DropdownMenuItem>
+              </>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </nav>

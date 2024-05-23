@@ -1,15 +1,23 @@
 import "./Product.css";
 import Navbar from "../../components/Navbar/Navbar";
-import { useLoaderData } from "react-router-dom";
-import { ProductContract } from "../../types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { fetchProductById } from "@/apis/products";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "@/router";
 
 function Product() {
-  const product = useLoaderData() as ProductContract;
   const [quantity, changeQuantity] = useState(1);
+  const { productId } = useParams("/Shop/:productId");
+  console.log(productId);
+  
+  const { data: productQuery } = useQuery({
+    queryKey: ['products', productId],
+    queryFn: () => fetchProductById(productId)
+  })
+  
   const handleChange = (value: string) => {
     if(Number.isInteger(Number(value)) && value !== "" && Number(value) < 100 && Number(value) > 0) {
       changeQuantity(Number(value));
@@ -22,18 +30,18 @@ function Product() {
       <div className="product-content">
         <Link id="product-path" to="../shop">← <span>Back to Shop</span></Link>
         <Link id="product-path-mobile" to="../shop">← <span>Shop</span></Link>
-        <img className="border-4 border-[#3D2102] rounded-3xl p-5" src={product.imageUrl} alt={product.name} id="product-image"></img>
+        <img className="border-4 border-[#3D2102] rounded-3xl p-5" src={productQuery?.data?.imageUrl} alt={productQuery?.data?.name} id="product-image"></img>
         <div className="product-text">
           <div id="name-and-tag">
-            <p id="hot-product" style={{display: product.popularItem ? "block" : "none"}}>HOT</p>
-            <h1 id="product-name" className="font-medium text-4xl">{product.name}</h1>
+            <p id="hot-product" style={{display: productQuery?.data?.popularItem ? "block" : "none"}}>HOT</p>
+            <h1 id="product-name" className="font-medium text-4xl">{productQuery?.data?.name}</h1>
           </div>
           <div className="star-rating flex text-[#A7703F]">
-            <p>{product.rating}</p>
+            <p>{productQuery?.data?.rating}</p>
             <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" />
-            <p>({product.numRatings})</p>
+            <p>({productQuery?.data?.numRatings})</p>
           </div>
-          <p id="product-price">${product.price.toFixed(2)}</p>
+          <p id="product-price">${productQuery?.data?.price.toFixed(2)}</p>
           <div className="rule border-b-2 border-[#ab977f]"/>
           <p>description</p>
           <div style={{margin: "1rem 0", display: "flex", flexDirection: "column"}}>

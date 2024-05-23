@@ -37,9 +37,12 @@ export default function Signup() {
       setIsLoading(true)
       await signUp(data)
       toast.success('Sign-up successfully!')
+      console.log("thanh cong");
+      
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message)
+        console.log('Error response:', error.response?.data);
       } 
     }finally {
       setIsLoading(false)

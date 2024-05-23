@@ -33,10 +33,10 @@ export const signIn = async (data: SignInData) => {
   return res.data
 }
 
-export const signUp = async ({ lastName, firstName, email, password}: SignUp) => {
+export const signUp = async ({ firstName, lastName, email, password}: SignUp) => {
   const res = await request.post('/sign-up', {
-    lastName,
     firstName,
+    lastName,
     email,
     password,
   })

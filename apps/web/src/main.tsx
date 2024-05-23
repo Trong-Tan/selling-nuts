@@ -6,7 +6,6 @@ import Map from "./pages/Map/Map";
 import About from "./pages/About/About";
 import ErrorElement from "./pages/Error/Error";
 import Product from "./pages/Product/Product";
-import { ProductContract } from "./types";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";

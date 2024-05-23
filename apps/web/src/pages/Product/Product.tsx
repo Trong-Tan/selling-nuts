@@ -4,11 +4,21 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { fetchProductById } from "@/apis/products";
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@/router";
+import { fetchProductById } from "@/apis/products";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 
-function Product() {
+const queryClient = new QueryClient(); // Tạo một instance của QueryClient
+
+function Product (){
+  return(
+    <QueryClientProvider client={queryClient}> {/* Bọc component trong QueryClientProvider và cung cấp QueryClient */}
+      <ProductContent />
+    </QueryClientProvider>
+  )
+}
+
+function ProductContent() {
   const [quantity, changeQuantity] = useState(1);
   const { productId } = useParams("/Shop/:productId");
   console.log(productId);
@@ -17,6 +27,8 @@ function Product() {
     queryKey: ['products', productId],
     queryFn: () => fetchProductById(productId)
   })
+
+  console.log(productQuery)
   
   const handleChange = (value: string) => {
     if(Number.isInteger(Number(value)) && value !== "" && Number(value) < 100 && Number(value) > 0) {

@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import * as z from 'zod'
 import Signup from '../components/Signup'
-import Navbar from '@/components/Navbar/Navbar'
 import { useState } from 'react'
 
 export type LoginInputs = z.infer<typeof loginSchema>

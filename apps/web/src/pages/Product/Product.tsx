@@ -36,6 +36,10 @@ function ProductContent() {
     }
   }
 
+  async function addToCart() {
+    
+  }
+
   return ( 
     <div style={{width: "100%", display: "flex", flexDirection: "column", minHeight: "90vh", marginTop: "10vh"}}>
       <Navbar location=""/>
@@ -63,7 +67,7 @@ function ProductContent() {
               <input value={String(quantity)} onChange={(e) => handleChange(e.currentTarget.value)}/>
               <Button onClick={() => handleChange(String(quantity + 1))} onDoubleClick={e => e.preventDefault()}>+</Button>
             </div>
-            <Button className="bg-[#3D2102]">Add to cart</Button>
+            <Button className="bg-[#3D2102]" onClick={addToCart}>Add to cart</Button>
           </div>
         </div>
       </div>

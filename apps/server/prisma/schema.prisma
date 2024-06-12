@@ -29,3 +29,14 @@ model Product {
   
   @@map("products")
 }
+
+model Cart {
+  id          String         @id @default(cuid())
+  productName   String?             
+  price    Int?
+  discountPrice       Int?         
+  numRatings         Int?
+  imageUrl      String?
+  
+  @@map("carts")
+}

@@ -16,8 +16,6 @@ import { Cog } from "lucide-react";
 import { getToken, removeToken } from "@/utils/token";
 
 function Navbar(props: { location: string }) {
-  const paths = getPaths(props.location);
-  const [logoutPopup, setLogoutPopup] = useState<"none" | "block">("none");
   const [cartPopup, setCartPopup] = useState<"none" | "block">("none");
   const [navbar, showNav] = useState<"flex" | "">("");
   const cartNum = 0;
@@ -48,9 +46,9 @@ function Navbar(props: { location: string }) {
       <img src={navIcon} alt="navigation links" className="nav-icon" 
         onClick={() => {navbar == "flex" ? showNav("") : showNav("flex")}}/>
       <nav className="navbar" style={{display: navbar}}>
-        <Link to={paths.shopPath}>Shop</Link>
-        <Link to={paths.mapPath}>Locations</Link>
-        <Link to={paths.aboutPath}>About Us</Link>
+        <Link to={"/shop"}>Shop</Link>
+        <Link to={"/locations"}>Locations</Link>
+        <Link to={"/about"}>About Us</Link>
         <Link to="" id="cart-nav">Cart</Link>
         <div className="icons">
           <img
@@ -79,10 +77,10 @@ function Navbar(props: { location: string }) {
             ) : (
               <>
                 <DropdownMenuItem>
-                  <Link to={paths.loginPath}>Login</Link>
+                  <Link to={"/login"}>Login</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link to={paths.loginPath}>Sign-up</Link>
+                  <Link to={"/login"}>Sign-up</Link>
                 </DropdownMenuItem>
               </>
             )}
@@ -92,49 +90,5 @@ function Navbar(props: { location: string }) {
     </div>
   );
 }
-
-interface Paths {
-  shopPath: string;
-  mapPath: string;
-  aboutPath: string;
-  loginPath: string
-}
-
-const getPaths = (location: string): Paths => {
-  let shopPath, mapPath, aboutPath, loginPath;
-  switch (location) {
-  case "home":
-    (shopPath = "/shop"), (mapPath = "/locations"), (aboutPath = "/about"), (loginPath = "../login");
-    break;
-  case "shop":
-    (shopPath = ""), (mapPath = "../locations"), (aboutPath = "../about"), (loginPath = "../login");
-    break;
-  case "map":
-    (shopPath = "../shop"), (mapPath = ""), (aboutPath = "../about"), (loginPath = "../login");
-    break;
-  case "about":
-    (shopPath = "../shop"), (mapPath = "../locations"), (aboutPath = ""), (loginPath = "../login");
-    break;
-  case "login":
-    (shopPath = "../shop"), (mapPath = "../locations"), (aboutPath = ""), (loginPath = "");
-    break;  
-  case "error":
-    (shopPath = "../shop"),
-    (mapPath = "../locations"),
-    (aboutPath = "../about");
-    (loginPath = "../login");
-    break;
-  default:
-    (shopPath = "../shop"), (mapPath = "../locations"), (aboutPath = "../about"), (loginPath = "../login");
-    break;
-  }
-
-  return {
-    shopPath,
-    mapPath,
-    aboutPath,
-    loginPath,
-  };
-};
 
 export default Navbar;

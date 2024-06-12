@@ -10,6 +10,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 import Login from "./pages/login";
+import Cart from "./components/Cart/Cart";
 
 const router = createBrowserRouter([
   { 
@@ -40,7 +41,12 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/cart",
+    element: <Cart />
   }
+  
   
 ]);
 

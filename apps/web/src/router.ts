@@ -1,18 +1,18 @@
+// Generouted, changes to this file will be overriden
+/* eslint-disable */
+
 import { components, hooks, utils } from '@generouted/react-router/client'
 
 export type Path =
-  | `/About`
-  | `/Error`
-  | `/Home`
-  | `/Map`
-  | `/Product`
-  | `/Shop`
-  | `/Shop/:productId`
+  | `/About/About`
+  | `/Error/Error`
+  | `/Home/Home`
+  | `/Map/Map`
+  | `/Product/Product`
+  | `/Shop/Shop`
   | `/login`
 
-export type Params = {
-  '/Shop/:productId' : {productId : string}
-}
+export type Params = {}
 
 export type ModalPath = never
 

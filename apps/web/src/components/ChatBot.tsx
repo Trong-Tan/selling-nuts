@@ -48,7 +48,7 @@ function ChatBot() {
         <PopoverContent className="relative bottom-20 rounded-t-lg mr-12">
           <img src={bgChatBot} alt="" className="h-72 static bottom-0 rounded-t-lg border-t-8 border-x-8 border-[#A46B35] opacity-75"/>
           <div className="w-full py-3 overflow-y-auto h-80 absolute bottom-0 top-0 p-2 font-mono text-base">
-            <div className="flex gap-2 pt-2 px-2"><Bot /> <div className="rounded-3xl bg-white p-2 h-auto w-60">  "Please!! Tell me what you want!"</div> </div><br />
+            <div className="flex gap-2 pt-2 px-2"><Bot /> <div className="rounded-3xl bg-white p-2 h-auto w-60">  Please!! Tell me what you want!</div> </div><br />
             {conversations.map((conversation, index) => (
               <div key={index}>
                 <div className="user flex gap-2 justify-end">

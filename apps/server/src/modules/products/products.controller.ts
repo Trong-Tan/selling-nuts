@@ -14,9 +14,9 @@ router
 })
 
 .get("/", async (c) => {
-    const products = await ProductsService.getAllProducts();
-    return c.json({
-      data: products,
-      status: 200,
-    });
+  const products = await ProductsService.getAllProducts();
+  return c.json({
+    data: products,
+    status: 200,
   });
+});

@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import { useParams } from "@/router";
 import { fetchProductById } from "@/apis/products";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { createCart } from "@/apis/cart";
 
-const queryClient = new QueryClient(); // Tạo một instance của QueryClient
+const queryClient = new QueryClient(); 
 
 function Product (){
   return(
-    <QueryClientProvider client={queryClient}> {/* Bọc component trong QueryClientProvider và cung cấp QueryClient */}
+    <QueryClientProvider client={queryClient}>
       <ProductContent />
     </QueryClientProvider>
   )
@@ -21,23 +22,38 @@ function Product (){
 function ProductContent() {
   const [quantity, changeQuantity] = useState(1);
   const { productId } = useParams("/Shop/:productId");
-  console.log(productId);
   
   const { data: productQuery } = useQuery({
     queryKey: ['products', productId],
     queryFn: () => fetchProductById(productId)
   })
 
-  console.log(productQuery)
-  
   const handleChange = (value: string) => {
     if(Number.isInteger(Number(value)) && value !== "" && Number(value) < 100 && Number(value) > 0) {
       changeQuantity(Number(value));
     }
   }
 
-  async function addToCart() {
-    
+  const handleAddToCart = async () => {
+    if (!productQuery?.data) {
+      console.error('Product data is not available');
+      return;
+    }
+    try {
+      const cartData = {
+        productId: productQuery.data.id,
+        productName: productQuery.data.name,
+        price: productQuery.data.price,
+        discountPrice: productQuery.data.discountPrice,
+        numRatings: productQuery.data.numRatings,
+        imageUrl: productQuery.data.imageUrl,
+        quantity: quantity
+      };
+      await createCart(cartData);
+      console.log("Thành công");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return ( 
@@ -67,7 +83,7 @@ function ProductContent() {
               <input value={String(quantity)} onChange={(e) => handleChange(e.currentTarget.value)}/>
               <Button onClick={() => handleChange(String(quantity + 1))} onDoubleClick={e => e.preventDefault()}>+</Button>
             </div>
-            <Button className="bg-[#3D2102]" onClick={addToCart}>Add to cart</Button>
+            <Button className="bg-[#3D2102]" onClick={handleAddToCart}>Add to cart</Button>
           </div>
         </div>
       </div>

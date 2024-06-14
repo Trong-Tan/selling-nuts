@@ -17,10 +17,10 @@ export interface User {
   workAt: string
 }
 interface UpdateMe {
-  fullName?: string
-  age?: number
-  avatar?: string
-  phone?: number
+  firstName?: string
+  lastName?: string
+  email?: string
+  address?: string
 }
 
 interface SignInData {
@@ -73,11 +73,11 @@ export const getUser = async (id: string) => {
   const res = await request.get(`/users/${id}`)
   return res.data
 }
-export const updateMe = async ({ fullName, age, avatar, phone }: UpdateMe) => {
+export const updateMe = async ({ firstName, lastName, email, address }: UpdateMe) => {
   return request.put('/users/me', {
-    fullName,
-    age,
-    avatar,
-    phone
+    firstName,
+    lastName,
+    email,
+    address
   })
 }

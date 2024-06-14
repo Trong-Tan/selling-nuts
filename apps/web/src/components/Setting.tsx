@@ -2,21 +2,18 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
 import { toast } from 'sonner'
-import { signUp } from '@/apis/auth'
+import { updateMe } from '@/apis/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { settingSchema } from '@/utils/schema'
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogTitle,
   DialogTrigger,
-  DialogHeader
 } from '@/components/ui/dialog'
 import { useState } from 'react'
 import { z } from 'zod'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export type SettingInputs = z.infer<typeof settingSchema>
 
@@ -36,9 +33,11 @@ export default function Setting() {
     const onSubmit = async (data: SettingInputs) => {
         try {
           setIsLoading(true)
-        //   await signIn(data)
-          navigate('/')
-          toast.success('Login successfully!')
+          await updateMe(data)
+          // navigate('/')
+          toast.success('Update successfully!')
+          console.log("Thanh cong");
+          
         } catch (error) {
           if (error instanceof AxiosError) {
             toast.error(error.response?.data.message)

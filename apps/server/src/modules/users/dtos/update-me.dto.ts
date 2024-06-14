@@ -9,19 +9,14 @@ export const updateMeDto = z.object({
   lastName: z.string({
     required_error: "Name is required",
   }).optional(),
-  age: z
-    .number({
-      required_error: "Age is required",
+  email: z
+    .string({
+      required_error: "email is required",
     })
     .optional(),
-  avatar: z
+  address: z
     .string({
-      required_error: "Avatar is required",
-    })
-    .optional(),
-  phone: z
-    .string({
-      required_error: "Phone is required",
+      required_error: "address is required",
     })
     .optional(),
 });

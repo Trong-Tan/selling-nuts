@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
 import { toast } from 'sonner'
-import { updateMe } from '@/apis/auth'
+import { getMe, updateMe } from '@/apis/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { settingSchema } from '@/utils/schema'
@@ -14,11 +14,26 @@ import {
 import { useState } from 'react'
 import { z } from 'zod'
 import { useNavigate } from 'react-router-dom'
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
+
+const queryClient = new QueryClient(); 
 
 export type SettingInputs = z.infer<typeof settingSchema>
 
+export default function Cart() {
+  return (
+  <QueryClientProvider client={queryClient}>
+      <SettingContent />
+  </QueryClientProvider>
+  );
+}
+function SettingContent() {
 
-export default function Setting() {
+  const { data: meQuery } = useQuery({
+    queryKey: ['me'],
+    queryFn: getMe
+    });
+
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
 
@@ -69,14 +84,14 @@ export default function Setting() {
                                     <label htmlFor="first_name"
                                         className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                         first name</label>
-                                    <Input className="px-3 py-4" {...register('firstName')} placeholder="Firstname" type="text" />
+                                    <Input className="px-3 py-4" {...register('firstName')} placeholder="Firstname" type="text" value={meQuery?.data?.firstName} />
                                     {errors.firstName && <p className="text-sm text-red-500">{errors.firstName.message}</p>}
                                 </div>
                                 <div className="w-full">
                                     <label htmlFor="last_name"
                                         className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                         last name</label>
-                                    <Input className="px-3 py-4" {...register('lastName')} placeholder="Lastname" type="text" />
+                                    <Input className="px-3 py-4" {...register('lastName')} placeholder="Lastname" type="text" value={meQuery?.data?.lastName}/>
                                     {errors.lastName && <p className="text-sm text-red-500">{errors.lastName.message}</p>}
                                 </div>
                             </div>
@@ -84,13 +99,13 @@ export default function Setting() {
                                 <label htmlFor="email"
                                     className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                     email</label>
-                                <Input className="px-3 py-4" {...register('email')} placeholder="Email" type="email" />
+                                <Input className="px-3 py-4" {...register('email')} placeholder="Email" type="email" value={meQuery?.data?.email}/>
                                 {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
                             </div>
                             <div className="mb-2 sm:mb-6">
                                 <label htmlFor="address"
                                     className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Address</label>
-                                <Input className="px-3 py-4" {...register('address')} placeholder="Address" type="text" />
+                                <Input className="px-3 py-4" {...register('address')} placeholder="Address" type="text" value={meQuery?.data?.address}/>
                                 {errors.address && <p className="text-sm text-red-500">{errors.address.message}</p>}
                             </div>
                             <div className="flex justify-end">

@@ -1,4 +1,4 @@
-import { MAIL_FROM, MAIL_TRANSPORT } from "@/lib/constants";
+import { MAIL_FROM, MAIL_TRANSPORT } from "./constants";
 import * as nodemailer from "nodemailer";
 
 interface SendMailOptions {

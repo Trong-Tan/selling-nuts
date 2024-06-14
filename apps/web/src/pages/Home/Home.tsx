@@ -6,6 +6,7 @@ import walnuts from "../../assets/walnuts.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import ErrorElement from "../Error/Error";
 import ChatBot from "../../components/ChatBot";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { isLoading, error } = useAuth0();
@@ -32,8 +33,8 @@ function Home() {
             services!
           </p>
           <div className="button-container">
-            <Button className="text-white bg-[#A46B35]">Shop</Button>
-            <Button className="text-black bg-[#ECD2B8]">About Us</Button>
+            <Link to={"/shop"}><Button className="text-white bg-[#A46B35]">Shop</Button></Link>
+            <Link to={"/about"}><Button className="text-black bg-[#ECD2B8]">About Us</Button></Link>
           </div>
         </div>
         <img src={walnuts} alt="walnuts" />

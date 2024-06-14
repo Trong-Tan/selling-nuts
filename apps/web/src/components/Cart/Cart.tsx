@@ -1,10 +1,9 @@
 import { getMe } from "@/apis/auth"
 import { CreateCart, fetchProductByUserId } from "@/apis/cart"
-import { Item } from "@radix-ui/react-dropdown-menu";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { mailService } from "../../../../server/src/lib/mail.service";
+import { toast } from "sonner";
 
 const queryClient = new QueryClient(); 
 
@@ -47,7 +46,13 @@ function CartContent() {
     
     const handleCheckout = async () =>{
         try {
-            navigate("/")
+            await mailService.sendMail({
+                to: "trongtan.ttt0503@example.com", // Địa chỉ email người nhận
+                subject: "Order Confirmation",
+                html: `<h1>Thank you for your order</h1>
+                       <p>Your order total is $${includingVAT}.00 USD</p>`
+            });
+            toast.success('The content was send to your email. !')
         } catch (error) {
             console.log(error);
         }

@@ -68,3 +68,25 @@ export const createRoomSchema = z.object({
   location: z.string().min(1, { message: 'Location is required' }),
   description: z.string().min(1, { message: 'Description is required' })
 })
+
+export const settingSchema = z.object({
+  firstName: z
+    .string()
+    .transform(value => value.trim())
+    .pipe(
+      z
+        .string()
+        .min(1, { message: 'First name is required' })
+        .max(32, { message: 'First name is too long' })
+        .refine(value => /^[a-zA-Z]+[-'s]?[a-zA-Z]+$/.test(value), 'First name should contain only alphabets')
+    ),
+  lastName: z
+    .string()
+    .transform(value => value.trim())
+    .pipe(z.string().min(1, { message: 'Last name is required' })),
+  email: z.string().email({ message: 'Email is not valid!' }),
+  address: z
+    .string()
+    .transform(value => value.trim())
+    .pipe(z.string().min(1, { message: 'Address is required' })),
+})

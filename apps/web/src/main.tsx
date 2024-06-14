@@ -46,8 +46,6 @@ const router = createBrowserRouter([
     path: "/cart",
     element: <Cart />
   }
-  
-  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

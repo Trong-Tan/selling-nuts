@@ -17,6 +17,7 @@ model User {
   phone       String?
   password    String
   carts Cart[]
+  address     String?
   
   @@map("users")
 }

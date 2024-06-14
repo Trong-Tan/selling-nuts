@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import cartIcon from "../../assets/empty-cart-icon.png";
 import navIcon from "/logo.png";
 import { useState } from "react";
+import { Button } from '@/components/ui/button'
 
 import {
   DropdownMenu,
@@ -14,6 +15,9 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Cog } from "lucide-react";
 import { getToken, removeToken } from "@/utils/token";
+
+import Setting from "../../components/Setting";
+
 
 function Navbar(props: { location: string }) {
   const [navbar, showNav] = useState<"flex" | "">("");
@@ -46,11 +50,15 @@ function Navbar(props: { location: string }) {
             <Cog className="h-10 w-10"/>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>
+            <Setting/>
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             {accessToken ? (
               <DropdownMenuItem className="cursor-pointer" >
+                <Button>
                 <div className="log-out" onClick={handleLogout}>Log out</div>
+                </Button>
               </DropdownMenuItem>
             ) : (
               <>

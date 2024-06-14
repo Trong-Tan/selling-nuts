@@ -3,18 +3,37 @@ import { Cart } from "@prisma/client";
 
 export class CartsService {
   static async create(data: Cart) {
-    try {
       const cart = await db.cart.create({
         data: data,
       });
       return cart;
-    } catch (error) {
-      console.error("Error creating cart in database:", error);
-      throw new Error("Error creating cart");
-    }
   }
-  static async getAllCarts() {
-    const carts = await db.product.findMany();
-    return carts;
+  static async getAllCartsbyUserId(userId: string) {
+    const carts = await db.cart.findMany({
+      where: {
+        userId,
+      }
+    })
+    return carts
+  }
+
+  static async getCartItemByUserIdAndProductId(userId: string, productId: string) {
+    return await db.cart.findFirst({
+      where: {
+        userId,
+        productId,
+      },
+    });
+  }
+
+  static async updateCartItemQuantity(cartId: string, newQuantity: number) {
+    return await db.cart.update({
+      where: {
+        id: cartId,
+      },
+      data: {
+        quantity: newQuantity,
+      },
+    });
   }
 }

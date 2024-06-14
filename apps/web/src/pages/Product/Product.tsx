@@ -1,13 +1,14 @@
 import "./Product.css";
 import Navbar from "../../components/Navbar/Navbar";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useParams } from "@/router";
 import { fetchProductById } from "@/apis/products";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { createCart } from "@/apis/cart";
+import { getMe } from "@/apis/auth";
 
 const queryClient = new QueryClient(); 
 
@@ -21,7 +22,19 @@ function Product (){
 
 function ProductContent() {
   const [quantity, changeQuantity] = useState(1);
-  const { productId } = useParams("/Shop/:productId");
+  const { productId } = useParams("/Shop/:productId")
+  const navigate = useNavigate()
+
+  const { data: meQuery } = useQuery({
+    queryKey: ['me'],
+    queryFn: getMe
+    });
+
+    const userId = meQuery?.data?.id;
+
+    if(!userId){
+        navigate("/login")
+    }
   
   const { data: productQuery } = useQuery({
     queryKey: ['products', productId],
@@ -36,8 +49,8 @@ function ProductContent() {
 
   const handleAddToCart = async () => {
     if (!productQuery?.data) {
-      console.error('Product data is not available');
-      return;
+      console.error('Product data is not available')
+      return
     }
     try {
       const cartData = {
@@ -48,11 +61,11 @@ function ProductContent() {
         numRatings: productQuery.data.numRatings,
         imageUrl: productQuery.data.imageUrl,
         quantity: quantity
-      };
-      await createCart(cartData);
-      console.log("Thành công");
+      }
+      await createCart(cartData)
+      navigate('/cart')
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
@@ -60,7 +73,7 @@ function ProductContent() {
     <div style={{width: "100%", display: "flex", flexDirection: "column", minHeight: "90vh", marginTop: "10vh"}}>
       <Navbar location=""/>
       <div className="product-content">
-        <Link id="product-path" to="../shop">← <span>Back to Shop</span></Link>
+        <Link id="product-path" to="/shop">← <span>Back to Shop</span></Link>
         <Link id="product-path-mobile" to="../shop">← <span>Shop</span></Link>
         <img className="border-4 border-[#3D2102] rounded-3xl p-5" src={productQuery?.data?.imageUrl} alt={productQuery?.data?.name} id="product-image"></img>
         <div className="product-text">

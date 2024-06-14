@@ -16,22 +16,9 @@ import { Cog } from "lucide-react";
 import { getToken, removeToken } from "@/utils/token";
 
 function Navbar(props: { location: string }) {
-  const [cartPopup, setCartPopup] = useState<"none" | "block">("none");
   const [navbar, showNav] = useState<"flex" | "">("");
-  const cartNum = 0;
   const accessToken = getToken()
   const navigate = useNavigate()
-  let cartNumDisplayed = "";
-  let cartNumVisibility: "visible" | "hidden" = "hidden";
-  if (cartNum == 0) {
-    cartNumVisibility = "hidden";
-  } else if (cartNum > 0 && cartNum < 100) {
-    cartNumVisibility = "visible";
-    cartNumDisplayed = String(cartNum);
-  } else {
-    cartNumVisibility = "visible";
-    cartNumDisplayed = "+";
-  }
 
   const handleLogout = () => {
     removeToken();
@@ -49,20 +36,11 @@ function Navbar(props: { location: string }) {
         <Link to={"/shop"}>Shop</Link>
         <Link to={"/locations"}>Locations</Link>
         <Link to={"/about"}>About Us</Link>
-        <Link to="" id="cart-nav">Cart</Link>
-        <div className="icons">
-          <img
-            src={cartIcon}
-            alt="view cart button"
-            onClick={() => setCartPopup("block")}
-          />
-        </div>
-        <div style={{ display: cartPopup }} className="screen-fill"
-          onClick={() => setCartPopup("none")}>
-          <div className="cart-popup login-popup">
-            <span className="login-text">Your cart is empty.</span>
-          </div>
-        </div>
+        <Link to={"/cart"}>
+        <img src={cartIcon} alt="" />
+        </Link>
+
+        
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Cog className="h-10 w-10"/>

@@ -1,6 +1,6 @@
 import { request } from '@/utils/request'
 
-interface CreateCart {
+export interface CreateCart {
     productId:          string             
     productName:        string             
     price:              number
@@ -12,4 +12,9 @@ interface CreateCart {
 
 export const createCart = async (data: CreateCart) => {
     await request.post('/carts', data)
+}
+
+export const fetchProductByUserId = async (id: string) => {
+    const response = await request.get(`/carts`); 
+    return response.data; 
 }

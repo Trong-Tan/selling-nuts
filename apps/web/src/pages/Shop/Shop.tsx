@@ -51,13 +51,12 @@ function ShopContent() {
                 <Link to={`/shop/${item.id}`} className="preview ">
                   {/* absolutely positioned elements */}
                   {/* {item.popularItem ? <div className="best-seller-tag"><p>Best Seller</p></div> : <></>} */}
-                  <img src={cartIcon} alt="add to cart button" className="cart-icon ml-40" width="50" height="50" onClick={e => e.preventDefault()}/>
                   {/* relative elements */}
                   <img src={`${item.imageUrl}`} alt={`${item.name}`} className="preview-image w-52 h-52" />
                   <div>
                     <h1>{item.name}</h1>
+                    <p>Price: ${item.price}</p>
                     {/* {item.discountPrice == null ? 
-                      <p>${item.price.toFixed(2)}</p> :
                       <p><s style={{color: "#8b0000"}}>${item.price.toFixed(2)}</s> ${item.discountPrice.toFixed(2)}</p>} */}
                     <div className="star-rating">
                       <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" /> <Star className="text-yellow-400" />

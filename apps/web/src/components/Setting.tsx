@@ -49,7 +49,7 @@ function SettingContent() {
         try {
           setIsLoading(true)
           await updateMe(data)
-          // navigate('/')
+          navigate('/login')
           toast.success('Update successfully!')
           console.log("Thanh cong");
           
@@ -84,14 +84,14 @@ function SettingContent() {
                                     <label htmlFor="first_name"
                                         className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                         first name</label>
-                                    <Input className="px-3 py-4" {...register('firstName')} placeholder="Firstname" type="text" value={meQuery?.data?.firstName} />
+                                    <Input className="px-3 py-4" {...register('firstName')} placeholder="Firstname" type="text"  />
                                     {errors.firstName && <p className="text-sm text-red-500">{errors.firstName.message}</p>}
                                 </div>
                                 <div className="w-full">
                                     <label htmlFor="last_name"
                                         className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                         last name</label>
-                                    <Input className="px-3 py-4" {...register('lastName')} placeholder="Lastname" type="text" value={meQuery?.data?.lastName}/>
+                                    <Input className="px-3 py-4" {...register('lastName')} placeholder="Lastname" type="text" />
                                     {errors.lastName && <p className="text-sm text-red-500">{errors.lastName.message}</p>}
                                 </div>
                             </div>
@@ -99,13 +99,13 @@ function SettingContent() {
                                 <label htmlFor="email"
                                     className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                     email</label>
-                                <Input className="px-3 py-4" {...register('email')} placeholder="Email" type="email" value={meQuery?.data?.email}/>
+                                <Input className="px-3 py-4" {...register('email')} placeholder="Email" type="email" />
                                 {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
                             </div>
                             <div className="mb-2 sm:mb-6">
                                 <label htmlFor="address"
                                     className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Address</label>
-                                <Input className="px-3 py-4" {...register('address')} placeholder="Address" type="text" value={meQuery?.data?.address}/>
+                                <Input className="px-3 py-4" {...register('address')} placeholder="Address" type="text" />
                                 {errors.address && <p className="text-sm text-red-500">{errors.address.message}</p>}
                             </div>
                             <div className="flex justify-end">

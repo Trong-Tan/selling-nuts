@@ -30,11 +30,8 @@ function ProductContent() {
     queryFn: getMe
     });
 
-    const userId = meQuery?.data?.id;
 
-    if(!userId){
-        navigate("/login")
-    }
+    
   
   const { data: productQuery } = useQuery({
     queryKey: ['products', productId],
@@ -48,9 +45,9 @@ function ProductContent() {
   }
 
   const handleAddToCart = async () => {
-    if (!productQuery?.data) {
-      console.error('Product data is not available')
-      return
+    const userId = meQuery?.data?.id
+    if(!userId){
+        navigate("/login")
     }
     try {
       const cartData = {

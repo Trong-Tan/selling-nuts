@@ -69,7 +69,7 @@ export default function Login() {
             </div>
           </div>
           <p className="text-center font-primary">
-            <span className="font-bold">Tạo Trang</span> dành cho người nổi tiếng, thương hiệu hoặc doanh nghiệp.
+            <span className="font-bold">Tài khoản</span> này dành cho người biết chọn hạt giống tốt.
           </p>
         </div>
       </div>

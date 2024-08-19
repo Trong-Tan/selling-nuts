@@ -57,6 +57,7 @@ function ChatBot() {
                 </div>
                 <br />
                 <div className="bot flex gap-2">
+                  
                   <Bot />
                   <div className="bg-white p-2 h-auto w-60 rounded-3xl">  {conversation.answer}</div>                  
                 </div>

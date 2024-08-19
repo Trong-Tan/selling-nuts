@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/dialog'
 import { useState } from 'react'
 import { z } from 'zod'
+import { useNavigate } from 'react-router-dom'
 
 
 export type SignUpInputs = z.infer<typeof signUpSchema>
@@ -30,6 +31,7 @@ export default function Signup() {
   })
 
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
 
   const onSubmit = async (data: SignUpInputs) => {
@@ -38,7 +40,7 @@ export default function Signup() {
       await signUp(data)
       toast.success('Sign-up successfully!')
       console.log("thanh cong");
-      
+      navigate('/login')
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message)

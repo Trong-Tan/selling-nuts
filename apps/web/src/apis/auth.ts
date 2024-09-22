@@ -10,11 +10,8 @@ export interface User {
   lastName: string
   firstName: string
   id: string
-  fullName: string
   avatar: string
   school: string
-  address: string
-  workAt: string
 }
 interface UpdateMe {
   firstName?: string

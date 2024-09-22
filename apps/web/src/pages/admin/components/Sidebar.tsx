@@ -8,13 +8,13 @@ function Sidebar() {
       <nav className="mt-4">
         <ul className='flex flex-col gap-5'>
           <li className='flex hover:bg-gray-700 hover:rounded-lg'>
-            <NavLink to="/" className="block p-3 gap-3"><LayoutDashboard />   </NavLink>
+            <NavLink to="/admin/dashboard" className="block p-3 gap-3"><LayoutDashboard />   </NavLink>
             <span className='mt-3'>Dashboard</span></li>
           <li className='flex hover:bg-gray-700 hover:rounded-lg'>
-            <NavLink to="/settings" className="block p-3 gap-3"><Settings />   </NavLink>
+            <NavLink to="/admin/setting" className="block p-3 gap-3"><Settings />   </NavLink>
             <span className='mt-3'>Settings</span></li>
           <li className='flex hover:bg-gray-700 hover:rounded-lg'>
-            <NavLink to="/reports" className="block p-3 gap-3"><BookA />  </NavLink>
+            <NavLink to="/admin/report" className="block p-3 gap-3"><BookA />  </NavLink>
             <span className='mt-3'>Reports</span> 
           </li>
           <li className='flex hover:bg-gray-700 hover:rounded-lg'>

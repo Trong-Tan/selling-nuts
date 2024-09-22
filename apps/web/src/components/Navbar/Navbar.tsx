@@ -43,8 +43,6 @@ function Navbar(props: { location: string }) {
         <Link to={"/cart"}>
         <img src={cartIcon} alt="" />
         </Link>
-
-        
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Cog className="h-10 w-10"/>

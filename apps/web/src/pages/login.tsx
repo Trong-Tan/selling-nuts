@@ -36,7 +36,8 @@ export default function Component() {
         setIsLoading(true)
         const res = await signIn(data)
         setToken(res.accessToken)
-        navigate('/')
+        navigate('/admin')
+        // navigate('/')
         toast.success('Login successfully!')
       }
     } catch (error) {

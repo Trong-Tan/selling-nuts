@@ -1,26 +1,19 @@
 import "./style/Product.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useParams } from "@/router";
 import { fetchProductById } from "@/apis/products";
 import { useQuery } from "@tanstack/react-query";
 import { createCart } from "@/apis/cart";
-import { getMe } from "@/apis/auth";
+import { User } from "@/apis/auth";
 
 export default function Component() {
   const [quantity, changeQuantity] = useState(1);
   const { productId } = useParams("/:productId")
   const navigate = useNavigate()
-
-  const { data: meQuery } = useQuery({
-    queryKey: ['me'],
-    queryFn: getMe
-    });
-
-
-    
+  const { me } = useOutletContext<{ me: User }>()
   
   const { data: productQuery } = useQuery({
     queryKey: ['products', productId],
@@ -34,7 +27,7 @@ export default function Component() {
   }
 
   const handleAddToCart = async () => {
-    const userId = meQuery?.data.id
+    const userId = me?.id
     if(!userId){
         navigate("/login")
     }

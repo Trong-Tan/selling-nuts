@@ -11,10 +11,11 @@ export type Path =
   | `/Error`
   | `/Map`
   | `/Shop`
-  | `/admin/admin`
-  | `/admin/components/Dashboard`
-  | `/admin/components/Setting`
+  | `/admin`
   | `/admin/components/Sidebar`
+  | `/admin/dashboard`
+  | `/admin/report`
+  | `/admin/setting`
   | `/login`
 
 export type Params = {

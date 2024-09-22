@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
 import { toast } from 'sonner'
-import { getMe, updateMe } from '@/apis/auth'
+import { updateMe} from '@/apis/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { settingSchema } from '@/utils/schema'
@@ -13,27 +13,11 @@ import {
 } from '@/components/ui/dialog'
 import { useState } from 'react'
 import { z } from 'zod'
-import { useNavigate } from 'react-router-dom'
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
-
-const queryClient = new QueryClient(); 
+import { useNavigate} from 'react-router-dom'
 
 export type SettingInputs = z.infer<typeof settingSchema>
 
 export default function Cart() {
-  return (
-  <QueryClientProvider client={queryClient}>
-      <SettingContent />
-  </QueryClientProvider>
-  );
-}
-function SettingContent() {
-
-  const { data: meQuery } = useQuery({
-    queryKey: ['me'],
-    queryFn: getMe
-    });
-
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
 

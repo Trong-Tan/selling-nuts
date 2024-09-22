@@ -28,7 +28,6 @@ export default function Component() {
         <img src={walnuts} alt="walnuts" />
       </div>
       <ChatBot/>
-      <PromotionBar />
     </div>
   );
 }

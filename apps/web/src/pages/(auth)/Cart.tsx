@@ -1,20 +1,14 @@
-import { getMe } from "@/apis/auth"
+import { User } from "@/apis/auth"
 import { CreateCart, fetchProductByUserId } from "@/apis/cart"
 import { useQuery } from "@tanstack/react-query"
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import {  Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import { createOrder, updateOrderId } from "@/apis/order";
 import { getToken } from "@/utils/token";
     
 export default function Component() {
     const navigate = useNavigate()
-
-    const { data: meQuery } = useQuery({
-        queryKey: ['me'],
-        queryFn: getMe
-    });
-
-    const userId = meQuery?.data?.id;
-
+    const { me } = useOutletContext<{ me: User }>()
+    const userId = me?.id;
     const accessToken = getToken()
 
     if (!accessToken) return <Navigate to="/" />

@@ -1,21 +1,11 @@
 import { getMe } from "@/apis/auth"
 import { CreateCart, fetchProductByUserId } from "@/apis/cart"
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { createOrder, updateOrderId } from "@/apis/order";
 import { getToken } from "@/utils/token";
-
-const queryClient = new QueryClient(); 
-
-export default function Cart() {
-    return (
-        <QueryClientProvider client={queryClient}>
-            <CartContent />
-        </QueryClientProvider>
-    );
-}
     
-function CartContent() {
+export default function Component() {
     const navigate = useNavigate()
 
     const { data: meQuery } = useQuery({
@@ -53,10 +43,7 @@ function CartContent() {
     return (
         <>
             <body>
-                <div className="h-screen bg-[#FAF9F6] pt-20">
-                    <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
-                    <Link id="product-path" to="../shop">← <span>Back to shop</span></Link>
-
+                <div className="h-screen bg-[#FAF9F6] pt-40">
                     <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0 ">
                         <div className="flex flex-col w-full overflow-y-auto max-h-96 bg-[#F3F4F6]">
                             {/* item list */}

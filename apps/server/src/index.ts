@@ -7,6 +7,7 @@ import { router as usersRouter } from "./modules/users/users.controller";
 import { router as cartsRouter } from "./modules/carts/carts.controller";
 import { router as productsRouter } from "./modules/products/products.controller";
 import { router as ordersRouter } from "./modules/orders/orders.controller";
+import { router as adminRouter } from "./modules/admin/admin.controller";
 import { errorFilter } from "./lib/error-filter";
 
 const app = new Hono().basePath("/api");
@@ -27,6 +28,7 @@ app.route("/products", productsRouter);
 app.route("/users", usersRouter);
 app.route("/carts", cartsRouter);
 app.route("/orders", ordersRouter);
+app.route("/admin", adminRouter);
 app.notFound((c) => {
   return c.json(
     {

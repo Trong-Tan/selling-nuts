@@ -1,7 +1,7 @@
-import Navbar from "../../components/Navbar/Navbar"
-import Button from "../../components/Button/Button";
-import "./About.css"
-import trees from "../../assets/pistachio-trees.png"
+// import Button from "../../components/Button/Button";
+import "./style/About.css"
+import trees from "@/assets/pistachio-trees.png"
+import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 
 class TimeoutPromise extends Promise<void> {
@@ -17,7 +17,7 @@ class TimeoutPromise extends Promise<void> {
   }
 }
 
-function About() {
+export default function Component() {
   const messageBox = useRef<HTMLDialogElement>(null);
   const form = useRef<HTMLFormElement>(null);
   const [messageSent, showMessageSent] = useState(false);
@@ -36,15 +36,14 @@ function About() {
 
   return (
     <div>
-      <Navbar location="about"/>
-      <div className="about row">
+      <div className="about row ">
         <img src={trees} alt="pistachio tree fields"/>
         <div className="story">
           <h1>Our Story</h1>
           {story}
           <div style={{display: "flex", gap: "1.5vw"}}>
-            <Button buttonType="primary" textType="inverted-text-color" destination="../shop">Shop</Button>
-            <Button buttonType="secondary" textType="normal-text-color" listener={openMessage}>Contact Us</Button>
+            <Button className="bg-[#A46B35] text-white rounded-lg">Shop</Button>
+            <Button className="bg-[#ECD2B8] text-black rounded-lg">Contact Us</Button>
           </div>
           <dialog ref={messageBox}>
             <h1>What's Up?</h1>
@@ -53,10 +52,6 @@ function About() {
               <input id="email" name="email" placeholder="Email *" type="email" required={true}/>
               <textarea id="message" name="message" rows={4} cols={80} maxLength={320} placeholder="Message *" required={true}/>
             </form>
-            <div className="button-container">
-              <Button buttonType="secondary" textType="normal-text-color" listener={closeMessage}>Cancel</Button>
-              <Button buttonType="primary" textType="inverted-text-color" >Send</Button>
-            </div>
           </dialog>
         </div>
       </div>
@@ -68,7 +63,7 @@ function About() {
   );
 }
 
-export default About;
+
 
 const story =
 <div>

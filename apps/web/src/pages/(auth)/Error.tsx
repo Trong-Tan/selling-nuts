@@ -1,10 +1,10 @@
-import "./Error.css";
+import "./style/Error.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Button from "../../components/Button/Button";
 import { useRouteError } from "react-router-dom";
-import sadPeanut from "../../assets/sad-peanut.png"
+import sadPeanut from "@/assets/sad-peanut.png"
 
-function ErrorElement(props: {error?: string}) {
+export default function Component(props: {error?: string}) {
   let errorMessage = useRouteError();
   if(errorMessage == undefined) {
     errorMessage = props.error;
@@ -33,4 +33,3 @@ function ErrorElement(props: {error?: string}) {
   );
 }
 
-export default ErrorElement;

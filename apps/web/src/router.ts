@@ -4,15 +4,22 @@
 import { components, hooks, utils } from '@generouted/react-router/client'
 
 export type Path =
-  | `/About/About`
-  | `/Error/Error`
-  | `/Home/Home`
-  | `/Map/Map`
-  | `/Product/Product`
-  | `/Shop/Shop`
+  | `/`
+  | `/:productId`
+  | `/About`
+  | `/Cart`
+  | `/Error`
+  | `/Map`
+  | `/Shop`
+  | `/admin/admin`
+  | `/admin/components/Dashboard`
+  | `/admin/components/Setting`
+  | `/admin/components/Sidebar`
   | `/login`
 
-export type Params = {}
+export type Params = {
+  '/:productId': { productId: string }
+}
 
 export type ModalPath = never
 

@@ -1,24 +1,12 @@
-import "./Home.css";
-import Navbar from "../../components/Navbar/Navbar";
+import "./style/Home.css";
 import PromotionBar from "../../components/PromotionBar/PromotionBar";
 import { Button } from "@/components/ui/button";
-import walnuts from "../../assets/walnuts.png";
-import { useAuth0 } from "@auth0/auth0-react";
-import ErrorElement from "../Error/Error";
+import walnuts from "@/assets/walnuts.png";
 import ChatBot from "../../components/ChatBot";
 import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar/Navbar";
 
-function Home() {
-  const { isLoading, error } = useAuth0();
-
-  if (isLoading) {
-    return <p>loading your data</p>;
-  }
-
-  if (error) {
-    return <ErrorElement error={error.message} />;
-  }
-
+export default function Component() {
   return (
     <div>
       <Navbar location="home" />
@@ -44,5 +32,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

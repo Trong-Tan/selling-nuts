@@ -1,28 +1,17 @@
-import "./Product.css";
-import Navbar from "../../components/Navbar/Navbar";
+import "./style/Product.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useParams } from "@/router";
 import { fetchProductById } from "@/apis/products";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { createCart } from "@/apis/cart";
 import { getMe } from "@/apis/auth";
 
-const queryClient = new QueryClient(); 
-
-function Product (){
-  return(
-    <QueryClientProvider client={queryClient}>
-      <ProductContent />
-    </QueryClientProvider>
-  )
-}
-
-function ProductContent() {
+export default function Component() {
   const [quantity, changeQuantity] = useState(1);
-  const { productId } = useParams("/Shop/:productId")
+  const { productId } = useParams("/:productId")
   const navigate = useNavigate()
 
   const { data: meQuery } = useQuery({
@@ -45,18 +34,19 @@ function ProductContent() {
   }
 
   const handleAddToCart = async () => {
-    const userId = meQuery?.data?.id
+    const userId = meQuery?.data.id
     if(!userId){
         navigate("/login")
     }
     try {
       const cartData = {
-        productId: productQuery.data.id,
-        productName: productQuery.data.name,
-        price: productQuery.data.price,
-        discountPrice: productQuery.data.discountPrice,
-        numRatings: productQuery.data.numRatings,
-        imageUrl: productQuery.data.imageUrl,
+        productId: productQuery?.data.id,
+        productName: productQuery?.data.name,
+        orderId: productQuery?.data.orderId,
+        price: productQuery?.data.price,
+        discountPrice: productQuery?.data.discountPrice,
+        numRatings: productQuery?.data.numRatings,
+        imageUrl: productQuery?.data.imageUrl,
         quantity: quantity
       }
       await createCart(cartData)
@@ -68,10 +58,7 @@ function ProductContent() {
 
   return ( 
     <div style={{width: "100%", display: "flex", flexDirection: "column", minHeight: "90vh", marginTop: "10vh"}}>
-      <Navbar location=""/>
       <div className="product-content">
-        <Link id="product-path" to="/shop">← <span>Back to Shop</span></Link>
-        <Link id="product-path-mobile" to="../shop">← <span>Shop</span></Link>
         <img className="border-4 border-[#3D2102] rounded-3xl p-5" src={productQuery?.data?.imageUrl} alt={productQuery?.data?.name} id="product-image"></img>
         <div className="product-text">
           <div id="name-and-tag">
@@ -88,9 +75,9 @@ function ProductContent() {
           <p>description</p>
           <div style={{margin: "1rem 0", display: "flex", flexDirection: "column"}}>
             <p style={{fontWeight: "bold", fontSize: "0.95rem", margin: "0 0 0.4rem 0"}}>Quantity</p>
-            <div className="quantity-counter border-2 border-[#3D2102] rounded-md p-1">
+            <div className="flex flex-col gap-3 my-5 w-20">
               <Button onClick={() => handleChange(String(quantity - 1))} onDoubleClick={e => e.preventDefault()}>-</Button>
-              <input value={String(quantity)} onChange={(e) => handleChange(e.currentTarget.value)}/>
+              <input className="mt-3 w-20" value={String(quantity)} onChange={(e) => handleChange(e.currentTarget.value)}/>
               <Button onClick={() => handleChange(String(quantity + 1))} onDoubleClick={e => e.preventDefault()}>+</Button>
             </div>
             <Button className="bg-[#3D2102]" onClick={handleAddToCart}>Add to cart</Button>
@@ -101,4 +88,3 @@ function ProductContent() {
   );
 }
 
-export default Product;

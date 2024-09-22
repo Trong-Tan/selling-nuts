@@ -38,7 +38,7 @@ function Navbar(props: { location: string }) {
         onClick={() => {navbar == "flex" ? showNav("") : showNav("flex")}}/>
       <nav className="navbar" style={{display: navbar}}>
         <Link to={"/shop"}>Shop</Link>
-        <Link to={"/locations"}>Locations</Link>
+        <Link to={"/map"}>Locations</Link>
         <Link to={"/about"}>About Us</Link>
         <Link to={"/cart"}>
         <img src={cartIcon} alt="" />

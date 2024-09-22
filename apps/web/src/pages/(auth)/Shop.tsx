@@ -1,23 +1,11 @@
-import "./Shop.css"
-import Navbar from "../../components/Navbar/Navbar";
+import "./style/Shop.css"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import cartIcon from "../../assets/add-to-cart-icon.png";
 import { Star } from "lucide-react";
-import { useQuery, QueryClient, QueryClientProvider } from '@tanstack/react-query'; // Import QueryClient và QueryClientProvider
+import { useQuery} from '@tanstack/react-query'; // Import QueryClient và QueryClientProvider
 import { Product, fetchAllProducts } from "@/apis/products";
 
-const queryClient = new QueryClient(); // Tạo một instance của QueryClient
-
-function Shop() {
-  return (
-    <QueryClientProvider client={queryClient}> {/* Bọc component trong QueryClientProvider và cung cấp QueryClient */}
-      <ShopContent />
-    </QueryClientProvider>
-  );
-}
-
-function ShopContent() {
+export default function Component() {
   const [products, setProducts] = useState([]);
   const { data: productsQuery } = useQuery({
     queryKey: ['products'],
@@ -32,7 +20,6 @@ function ShopContent() {
 
   return (
     <div style={{width: "100%"}}>
-      <Navbar location="shop"/>
       <div className="shop">
         <div className="product-filter ">
           <h1 className="filter-title ">Filters</h1>
@@ -48,7 +35,7 @@ function ShopContent() {
           <div className="product-container">
             {productsQuery?.data.map((item: Product, index: number)=> (
               <div className="product-item border-2 border-[#ECD2B8] justify-center items-center cursor-pointer hover:border-[#97836f] hover:bg-[#fffaf5be]" key={index}>
-                <Link to={`/shop/${item.id}`} className="preview ">
+                <Link to={`/${item.id}`} className="preview ">
                   {/* absolutely positioned elements */}
                   {/* {item.popularItem ? <div className="best-seller-tag"><p>Best Seller</p></div> : <></>} */}
                   {/* relative elements */}
@@ -74,4 +61,4 @@ function ShopContent() {
   )
 }
 
-export default Shop;
+

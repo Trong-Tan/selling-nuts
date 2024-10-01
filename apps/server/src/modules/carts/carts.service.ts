@@ -1,20 +1,19 @@
 import { db } from "@/lib/db";
-import { Cart } from "@prisma/client";
+import { Cart, pendingOrder } from "@prisma/client";
 
 export class CartsService {
   static async create(data: Cart) {
-      const cart = await db.cart.create({
+      return await db.cart.create({
         data: data,
       });
-      return cart;
   }
+
   static async getAllCartsbyUserId(userId: string) {
-    const carts = await db.cart.findMany({
+    return await db.cart.findMany({
       where: {
         userId,
       }
-    })
-    return carts
+    });
   }
 
   static async getCartItemByUserIdAndProductId(userId: string, productId: string) {
@@ -34,6 +33,12 @@ export class CartsService {
       data: {
         quantity: newQuantity,
       },
+    });
+  }
+
+  static async checkOut(data: pendingOrder) {
+    return await db.pendingOrder.create({
+      data: data,
     });
   }
 }

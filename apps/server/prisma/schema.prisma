@@ -18,6 +18,7 @@ model User {
   password    String
   carts Cart[]
   orders Order[]
+  pendingOrders pendingOrder[]
   address     String?
   
   @@map("users")
@@ -29,6 +30,7 @@ model Product {
   discountPrice       Int?         
   numRatings         Int?
   imageUrl      String?
+  quantity Int?
   
   @@map("products")
 }
@@ -60,4 +62,15 @@ model Order {
   
   @@index([userId])
   @@map("orders")
+}
+
+model pendingOrder {
+  id          String         @id @default(cuid())
+  user        User?       @relation(fields: [userId], references: [id])
+  userId      String?
+  content String?
+  date DateTime?
+  
+  @@index([userId])
+  @@map("pendingOrder")
 }
